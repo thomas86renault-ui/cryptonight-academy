@@ -121,6 +121,14 @@ body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellips
     Un problème ? <a href="https://t.me/+C8tBneY82Ak4YzRk">Contacte-nous sur Telegram</a>
   </p>
 </div>
-
+<script>
+const urlParams = new URLSearchParams(window.location.search);
+const tid = urlParams.get('tid');
+if (tid) {
+  document.querySelectorAll('a[href*="buy.stripe.com"]').forEach(link => {
+    link.href = link.href + '?client_reference_id=' + tid;
+  });
+}
+</script>
 </body>
 </html>
