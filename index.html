@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -205,7 +206,7 @@ body::before{content:'';position:fixed;inset:0;background-image:url("data:image/
   .price-badge{padding:16px 32px;}
 }
 </style>
-<script type='text/javascript' src='https://api.netlify.com/kTjv-noz0o1b33SUUxaJO3G568Rydz_gJqTc5mgEKRD5YWsBKug1W6dnFPg1GtvlDyl-gT5iuR0vVZjlKanneADVHHHHDQiUYUZ5gtdjAZB8NpY3qajBoEHPtEpIeLFs7DWc7jTWDqnY6GsxYieo_nSmMZ-NCJqIDcQyH1ggTQKuzWzq0GeirLMi4phWmEWK5TgrPT2RsdBlPpiymCSUsYDQnGC1P_c7RsBQrsSeje-rdbqS_apXGzbGD-9TC-4ylfmxNcFVZvF09byTC2rP563i9S1ptndnKrcpPn0vDE-X8pGtGYn1HiVgYw52-O2ip8ouEeiDrKCAJN-Dhkw7FXVHbvIbmbfG4pAf77TDDN37dHLcECd_zq9iUKG8rE1ojmzpsDiqYFhdzFj9Ou57XYQU0G55lpPTpPvRpXeIIGhIRF2VUONWoevGxgy-WudocjRnIZEB2LXET6kvtpws4y7zV5pcYjw4BpXsSF95LiAECoVHtTJNSIWWgD44U7gsC_cg6deVUVpcmP6z_1uS'></script></head>
+</head>
 <body>
 
 <!-- ══════════════════════════════════════
@@ -326,8 +327,29 @@ body::before{content:'';position:fixed;inset:0;background-image:url("data:image/
 
 <script>
 // ════════════ STRIPE LINK ════════════
-const STRIPE_LINK = "https://buy.stripe.com/7sYaEP8fS9hbfCxeDagw002"; // ← remplace ici
-function goToStripe() { window.open(STRIPE_LINK, '_blank'); }
+const STRIPE_LINK = "COLLE_TON_LIEN_STRIPE_ICI";
+
+function goToStripe() {
+  const urlParams = new URLSearchParams(window.location.search);
+  let tid = urlParams.get('tid');
+  if (tid) {
+    window.open(STRIPE_LINK + '?client_reference_id=' + tid, '_blank');
+    return;
+  }
+  document.getElementById('tid-modal').style.display = 'flex';
+}
+
+function confirmTid() {
+  const tid = document.getElementById('tid-input').value.trim();
+  if (!tid || isNaN(tid)) { alert('Entre ton Telegram ID (chiffres uniquement)'); return; }
+  document.getElementById('tid-modal').style.display = 'none';
+  window.open(STRIPE_LINK + '?client_reference_id=' + tid, '_blank');
+}
+
+function skipTid() {
+  document.getElementById('tid-modal').style.display = 'none';
+  window.open(STRIPE_LINK, '_blank');
+}
 
 // ════════════ DATA ════════════
 const MODULES = [
@@ -454,7 +476,7 @@ async function doLogin(){
   if(!email||!password){showErr('Remplis tous les champs.');return;}
   btn.disabled=true; btn.textContent='Connexion...'; err.classList.remove('visible');
   try{
-    const res=await fetch('/api/login',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({email,password})});
+    const res=await fetch('/.netlify/functions/login',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({email,password})});
     const data=await res.json();
     if(!res.ok){showErr(data.error||'Erreur de connexion');return;}
     localStorage.setItem('cna_token',data.token);
@@ -557,5 +579,19 @@ window.addEventListener('DOMContentLoaded',()=>{
   if(window.location.hash==='#login')showLogin();
 });
 </script>
+<!-- MODAL TELEGRAM ID -->
+<div id="tid-modal" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.85);z-index:9999;align-items:center;justify-content:center;padding:24px;">
+  <div style="background:#0F0F0F;border:1px solid rgba(201,169,110,0.3);padding:40px 32px;max-width:380px;width:100%;position:relative;text-align:center;">
+    <div style="position:absolute;top:0;left:10%;right:10%;height:1px;background:linear-gradient(90deg,transparent,#C9A96E,transparent);"></div>
+    <p style="font-size:9px;letter-spacing:4px;color:#C9A96E;text-transform:uppercase;margin-bottom:20px;">Étape finale</p>
+    <h3 style="font-family:'Cormorant Garamond',serif;font-size:26px;font-weight:300;color:#F5F0E8;margin-bottom:12px;line-height:1.2;">Entre ton<br><em style="font-style:italic;color:#C9A96E;">Telegram ID</em></h3>
+    <p style="font-size:11px;color:rgba(245,240,232,0.6);margin-bottom:8px;line-height:1.6;">Pour activer ton accès automatiquement après paiement.</p>
+    <p style="font-size:10px;color:rgba(245,240,232,0.4);margin-bottom:24px;">Trouve ton ID en envoyant /start à <a href="https://t.me/userinfobot" target="_blank" style="color:#C9A96E;text-decoration:none;">@userinfobot</a> sur Telegram</p>
+    <input id="tid-input" type="number" placeholder="Ex: 123456789" onkeydown="if(event.key==='Enter')confirmTid()" style="width:100%;background:#161616;border:1px solid rgba(201,169,110,0.2);color:#F5F0E8;padding:13px 16px;font-family:'Montserrat',sans-serif;font-size:14px;outline:none;margin-bottom:12px;text-align:center;">
+    <button onclick="confirmTid()" style="width:100%;background:#C9A96E;color:#080808;border:none;padding:14px;font-family:'Montserrat',sans-serif;font-size:10px;letter-spacing:3px;text-transform:uppercase;font-weight:600;cursor:pointer;margin-bottom:10px;">Continuer vers le paiement →</button>
+    <button onclick="skipTid()" style="width:100%;background:transparent;color:rgba(245,240,232,0.3);border:none;padding:8px;font-family:'Montserrat',sans-serif;font-size:10px;cursor:pointer;">Passer cette étape</button>
+  </div>
+</div>
+
 </body>
 </html>
