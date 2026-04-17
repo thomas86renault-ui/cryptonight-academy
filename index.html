@@ -1,0 +1,561 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CryptoNight Academy</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --gold:#C9A96E; --gold-light:#E8D5A3; --gold-dark:#8B6914;
+  --black:#080808; --black-2:#0F0F0F; --black-3:#161616; --black-4:#1E1E1E;
+  --white:#F5F0E8; --white-dim:rgba(245,240,232,0.6); --white-faint:rgba(245,240,232,0.08);
+  --red:#E05252;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{background:var(--black);color:var(--white);font-family:'Montserrat',sans-serif;font-weight:300;overflow-x:hidden;min-height:100vh;}
+body::before{content:'';position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");pointer-events:none;z-index:999;opacity:0.4;}
+
+/* ══ SCREENS ══ */
+.screen{display:none;min-height:100vh;}
+.screen.active{display:block;}
+#landingScreen.active{display:block;}
+#loginScreen.active{display:flex;}
+#formationScreen.active{display:block;}
+
+/* ══════════════════════════════════════
+   LANDING — PAGE DE PRÉSENTATION
+══════════════════════════════════════ */
+.hero{position:relative;min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:40px 24px;overflow:hidden;}
+.hero::before{content:'';position:absolute;top:-200px;left:50%;transform:translateX(-50%);width:700px;height:700px;background:radial-gradient(circle,rgba(201,169,110,0.1) 0%,transparent 70%);pointer-events:none;}
+.hero::after{content:'';position:absolute;bottom:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--gold),transparent);}
+
+.logo-line{display:flex;align-items:center;gap:16px;margin-bottom:48px;opacity:0;animation:fadeUp 1s ease 0.2s forwards;}
+.logo-line::before,.logo-line::after{content:'';width:40px;height:1px;background:var(--gold);opacity:0.6;}
+.logo-tag{font-size:10px;letter-spacing:4px;color:var(--gold);text-transform:uppercase;font-weight:500;}
+
+.hero-title{font-family:'Cormorant Garamond',serif;font-size:clamp(52px,11vw,100px);font-weight:300;line-height:0.95;letter-spacing:-1px;margin-bottom:8px;opacity:0;animation:fadeUp 1s ease 0.4s forwards;}
+.hero-title em{font-style:italic;color:var(--gold);}
+.hero-subtitle{font-family:'Cormorant Garamond',serif;font-size:clamp(18px,3.5vw,26px);font-weight:300;color:var(--white-dim);letter-spacing:2px;margin-bottom:40px;opacity:0;animation:fadeUp 1s ease 0.6s forwards;}
+.hero-desc{font-size:13px;letter-spacing:0.5px;color:var(--white-dim);max-width:500px;line-height:1.9;margin-bottom:56px;opacity:0;animation:fadeUp 1s ease 0.8s forwards;}
+
+.price-badge{display:inline-flex;flex-direction:column;align-items:center;border:1px solid rgba(201,169,110,0.3);padding:20px 56px;margin-bottom:32px;position:relative;opacity:0;animation:fadeUp 1s ease 1s forwards;}
+.price-badge::before{content:'';position:absolute;inset:3px;border:1px solid rgba(201,169,110,0.08);}
+.price-amount{font-family:'Cormorant Garamond',serif;font-size:56px;font-weight:300;color:var(--gold);line-height:1;}
+.price-label{font-size:9px;letter-spacing:3px;color:var(--white-dim);text-transform:uppercase;margin-top:4px;}
+
+.cta-btn{display:inline-block;background:var(--gold);color:var(--black);padding:16px 52px;font-size:11px;letter-spacing:3px;text-transform:uppercase;font-weight:600;cursor:pointer;border:none;transition:all 0.3s ease;opacity:0;animation:fadeUp 1s ease 1.2s forwards;font-family:'Montserrat',sans-serif;text-decoration:none;}
+.cta-btn:hover{background:var(--gold-light);letter-spacing:4px;}
+
+.already-link{display:block;margin-top:20px;font-size:11px;color:var(--white-dim);cursor:pointer;opacity:0;animation:fadeUp 1s ease 1.4s forwards;transition:color 0.2s;}
+.already-link:hover{color:var(--gold);}
+.already-link span{border-bottom:1px solid rgba(201,169,110,0.3);}
+
+.scroll-hint{position:absolute;bottom:32px;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:8px;opacity:0;animation:fadeUp 1s ease 1.6s forwards;}
+.scroll-hint span{font-size:9px;letter-spacing:3px;color:var(--white-dim);text-transform:uppercase;}
+.scroll-line{width:1px;height:40px;background:linear-gradient(to bottom,var(--gold),transparent);animation:scrollPulse 2s ease-in-out infinite;}
+
+/* STATS */
+.stats-band{background:var(--black-3);border-top:1px solid rgba(201,169,110,0.1);border-bottom:1px solid rgba(201,169,110,0.1);padding:60px 24px;}
+.stats-inner{max-width:900px;margin:0 auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:40px;text-align:center;}
+.stat-number{font-family:'Cormorant Garamond',serif;font-size:52px;font-weight:300;color:var(--gold);line-height:1;margin-bottom:8px;}
+.stat-label{font-size:9px;letter-spacing:2px;color:var(--white-dim);text-transform:uppercase;}
+
+/* MODULES PREVIEW */
+.preview-section{padding:100px 24px;max-width:1100px;margin:0 auto;}
+.section-header{text-align:center;margin-bottom:72px;}
+.section-tag{font-size:9px;letter-spacing:4px;color:var(--gold);text-transform:uppercase;margin-bottom:16px;}
+.section-title{font-family:'Cormorant Garamond',serif;font-size:clamp(36px,6vw,64px);font-weight:300;line-height:1.1;}
+.section-title em{font-style:italic;color:var(--gold);}
+
+.preview-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:2px;}
+.preview-card{background:var(--black-3);padding:36px 28px;border:1px solid rgba(201,169,110,0.05);transition:all 0.3s;position:relative;overflow:hidden;}
+.preview-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,var(--gold),transparent);transform:scaleX(0);transition:transform 0.3s;}
+.preview-card:hover::before{transform:scaleX(1);}
+.preview-card:hover{background:var(--black-4);transform:translateY(-4px);}
+.preview-icon{font-size:28px;margin-bottom:16px;display:block;}
+.preview-num{font-size:9px;letter-spacing:3px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;}
+.preview-title{font-family:'Cormorant Garamond',serif;font-size:24px;font-weight:400;margin-bottom:10px;line-height:1.2;}
+.preview-desc{font-size:11px;color:var(--white-dim);line-height:1.7;margin-bottom:20px;}
+.preview-lessons{display:flex;flex-direction:column;gap:6px;}
+.preview-lesson{display:flex;align-items:center;gap:8px;font-size:11px;color:var(--white-dim);}
+.preview-lesson::before{content:'◆';color:var(--gold);font-size:7px;flex-shrink:0;}
+
+/* FOOTER CTA */
+.footer-cta{padding:120px 24px;text-align:center;position:relative;overflow:hidden;border-top:1px solid rgba(201,169,110,0.08);}
+.footer-cta::before{content:'';position:absolute;bottom:-200px;left:50%;transform:translateX(-50%);width:600px;height:600px;background:radial-gradient(circle,rgba(201,169,110,0.07) 0%,transparent 70%);pointer-events:none;}
+.footer-title{font-family:'Cormorant Garamond',serif;font-size:clamp(36px,7vw,72px);font-weight:300;line-height:1.1;margin-bottom:24px;}
+.footer-title em{font-style:italic;color:var(--gold);}
+.footer-sub{font-size:13px;color:var(--white-dim);letter-spacing:1px;margin-bottom:48px;max-width:420px;margin-left:auto;margin-right:auto;line-height:1.9;}
+.footer-already{display:block;margin-top:20px;font-size:11px;color:var(--white-dim);cursor:pointer;transition:color 0.2s;}
+.footer-already:hover{color:var(--gold);}
+.footer-already span{border-bottom:1px solid rgba(201,169,110,0.3);}
+
+/* ══════════════════════════════════════
+   LOGIN SCREEN
+══════════════════════════════════════ */
+#loginScreen{align-items:center;justify-content:center;padding:24px;position:relative;overflow:hidden;}
+#loginScreen::before{content:'';position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:600px;height:600px;background:radial-gradient(circle,rgba(201,169,110,0.07) 0%,transparent 70%);pointer-events:none;}
+
+.login-box{width:100%;max-width:420px;border:1px solid rgba(201,169,110,0.15);padding:48px 40px;position:relative;animation:fadeUp 0.7s ease forwards;}
+.login-box::before{content:'';position:absolute;inset:3px;border:1px solid rgba(201,169,110,0.05);pointer-events:none;}
+.login-box::after{content:'';position:absolute;top:0;left:10%;right:10%;height:1px;background:linear-gradient(90deg,transparent,var(--gold),transparent);}
+
+.login-logo{font-size:9px;letter-spacing:4px;color:var(--gold);text-transform:uppercase;text-align:center;margin-bottom:32px;display:flex;align-items:center;justify-content:center;gap:12px;}
+.login-logo::before,.login-logo::after{content:'';width:24px;height:1px;background:var(--gold);opacity:0.5;}
+.login-title{font-family:'Cormorant Garamond',serif;font-size:36px;font-weight:300;text-align:center;line-height:1.2;margin-bottom:6px;}
+.login-title em{font-style:italic;color:var(--gold);}
+.login-sub{font-size:11px;letter-spacing:1px;color:var(--white-dim);text-align:center;margin-bottom:36px;}
+
+.form-group{margin-bottom:18px;}
+.form-label{font-size:9px;letter-spacing:2px;color:var(--gold);text-transform:uppercase;display:block;margin-bottom:7px;}
+.form-input{width:100%;background:var(--black-3);border:1px solid rgba(201,169,110,0.1);color:var(--white);padding:13px 16px;font-family:'Montserrat',sans-serif;font-size:13px;font-weight:300;outline:none;transition:border-color 0.3s;}
+.form-input:focus{border-color:rgba(201,169,110,0.4);}
+.form-input::placeholder{color:rgba(245,240,232,0.2);}
+
+.btn-gold{width:100%;background:var(--gold);color:var(--black);border:none;padding:15px;font-family:'Montserrat',sans-serif;font-size:10px;letter-spacing:3px;text-transform:uppercase;font-weight:600;cursor:pointer;transition:all 0.3s;margin-top:8px;}
+.btn-gold:hover{background:var(--gold-light);letter-spacing:4px;}
+.btn-gold:disabled{opacity:0.5;cursor:not-allowed;}
+
+.error-msg{background:rgba(224,82,82,0.08);border:1px solid rgba(224,82,82,0.25);color:var(--red);padding:11px 14px;font-size:11px;margin-top:14px;display:none;}
+.error-msg.visible{display:block;}
+
+.login-back{text-align:center;margin-top:20px;font-size:11px;color:var(--white-dim);cursor:pointer;transition:color 0.2s;}
+.login-back:hover{color:var(--gold);}
+.login-back span{border-bottom:1px solid rgba(201,169,110,0.3);}
+.login-buy{text-align:center;margin-top:10px;font-size:11px;color:var(--white-dim);}
+.login-buy a{color:var(--gold);text-decoration:none;border-bottom:1px solid rgba(201,169,110,0.3);}
+
+/* ══════════════════════════════════════
+   FORMATION SCREEN
+══════════════════════════════════════ */
+.nav{position:sticky;top:0;background:rgba(8,8,8,0.95);backdrop-filter:blur(20px);border-bottom:1px solid rgba(201,169,110,0.1);padding:0 24px;display:flex;align-items:center;justify-content:space-between;height:60px;z-index:100;}
+.nav-logo{font-size:9px;letter-spacing:3px;color:var(--gold);text-transform:uppercase;}
+.nav-right{display:flex;align-items:center;gap:20px;}
+.nav-email{font-size:11px;color:var(--white-dim);}
+.nav-logout{font-size:9px;letter-spacing:2px;color:var(--white-dim);text-transform:uppercase;cursor:pointer;border:1px solid rgba(245,240,232,0.1);padding:6px 14px;transition:all 0.2s;background:none;font-family:'Montserrat',sans-serif;}
+.nav-logout:hover{border-color:var(--gold);color:var(--gold);}
+
+.formation-hero{padding:72px 24px 56px;text-align:center;position:relative;overflow:hidden;}
+.formation-hero::before{content:'';position:absolute;top:-80px;left:50%;transform:translateX(-50%);width:500px;height:400px;background:radial-gradient(circle,rgba(201,169,110,0.09) 0%,transparent 70%);pointer-events:none;}
+.formation-hero::after{content:'';position:absolute;bottom:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--gold),transparent);}
+.hero-tag2{font-size:9px;letter-spacing:4px;color:var(--gold);text-transform:uppercase;margin-bottom:20px;display:flex;align-items:center;justify-content:center;gap:12px;}
+.hero-tag2::before,.hero-tag2::after{content:'';width:32px;height:1px;background:var(--gold);opacity:0.5;}
+.formation-title{font-family:'Cormorant Garamond',serif;font-size:clamp(40px,8vw,80px);font-weight:300;line-height:1;margin-bottom:12px;}
+.formation-title em{font-style:italic;color:var(--gold);}
+.formation-subtitle{font-size:12px;color:var(--white-dim);letter-spacing:1px;}
+
+.progress-wrap{max-width:700px;margin:36px auto 0;padding:0 24px;display:flex;align-items:center;gap:16px;}
+.progress-track{flex:1;height:1px;background:rgba(201,169,110,0.1);position:relative;}
+.progress-fill{height:2px;background:var(--gold);margin-top:-0.5px;transition:width 0.5s ease;}
+.progress-text{font-size:10px;letter-spacing:2px;color:var(--gold);white-space:nowrap;}
+
+.modules-section{max-width:1100px;margin:0 auto;padding:56px 24px 100px;}
+.modules-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:2px;}
+
+.mod-card{background:var(--black-3);padding:32px 26px;cursor:pointer;transition:all 0.3s;border:1px solid rgba(201,169,110,0.05);position:relative;overflow:hidden;}
+.mod-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,var(--gold),transparent);transform:scaleX(0);transition:transform 0.3s;}
+.mod-card:hover::before,.mod-card.open::before{transform:scaleX(1);}
+.mod-card:hover,.mod-card.open{background:var(--black-4);}
+.mod-header{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:14px;}
+.mod-icon{font-size:24px;}
+.mod-badge{font-size:9px;letter-spacing:2px;color:var(--gold);border:1px solid rgba(201,169,110,0.25);padding:3px 8px;text-transform:uppercase;}
+.mod-num{font-size:9px;letter-spacing:3px;color:var(--gold);text-transform:uppercase;margin-bottom:5px;}
+.mod-title{font-family:'Cormorant Garamond',serif;font-size:23px;font-weight:400;margin-bottom:8px;line-height:1.2;}
+.mod-desc{font-size:11px;color:var(--white-dim);line-height:1.7;margin-bottom:18px;}
+
+.lessons-list{display:none;flex-direction:column;}
+.mod-card.open .lessons-list{display:flex;}
+.lesson-row{display:flex;align-items:center;gap:10px;padding:9px 0;border-top:1px solid var(--white-faint);cursor:pointer;transition:all 0.2s;}
+.lesson-row:hover{padding-left:6px;}
+.lesson-row:hover .lesson-name{color:var(--gold);}
+.lesson-check{width:17px;height:17px;border:1px solid rgba(201,169,110,0.3);border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:9px;transition:all 0.2s;}
+.lesson-row.done .lesson-check{background:var(--gold);border-color:var(--gold);color:var(--black);}
+.lesson-name{font-size:11px;color:var(--white-dim);line-height:1.4;transition:color 0.2s;flex:1;}
+
+.expand-btn{display:flex;align-items:center;gap:8px;font-size:9px;letter-spacing:2px;color:var(--gold);text-transform:uppercase;margin-top:14px;}
+.expand-icon{width:20px;height:20px;border:1px solid var(--gold);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:14px;transition:transform 0.3s;}
+.mod-card.open .expand-icon{transform:rotate(45deg);}
+
+/* CONTENT PANEL */
+.content-panel{background:var(--black-2);border-top:1px solid rgba(201,169,110,0.1);border-bottom:1px solid rgba(201,169,110,0.1);padding:64px 24px;display:none;}
+.content-panel.visible{display:block;}
+.content-inner{max-width:740px;margin:0 auto;}
+.content-breadcrumb{font-size:9px;letter-spacing:3px;color:var(--gold);text-transform:uppercase;margin-bottom:24px;}
+.content-title{font-family:'Cormorant Garamond',serif;font-size:clamp(30px,5vw,50px);font-weight:300;margin-bottom:28px;line-height:1.1;}
+.content-body{font-size:13px;line-height:2;color:var(--white-dim);}
+.content-body h3{font-family:'Cormorant Garamond',serif;font-size:21px;font-weight:400;color:var(--white);margin:28px 0 10px;}
+.content-body p{margin-bottom:14px;}
+.highlight-box{border-left:2px solid var(--gold);padding:14px 22px;margin:22px 0;background:rgba(201,169,110,0.04);font-style:italic;font-family:'Cormorant Garamond',serif;font-size:17px;color:var(--white);line-height:1.6;}
+.key-point{display:flex;align-items:flex-start;gap:10px;font-size:13px;color:var(--white-dim);line-height:1.6;margin-bottom:10px;}
+.key-point::before{content:'◆';color:var(--gold);font-size:7px;margin-top:6px;flex-shrink:0;}
+
+.mark-done-btn{display:inline-flex;align-items:center;gap:8px;background:transparent;border:1px solid var(--gold);color:var(--gold);padding:11px 22px;font-family:'Montserrat',sans-serif;font-size:9px;letter-spacing:2px;text-transform:uppercase;cursor:pointer;margin-top:28px;transition:all 0.2s;}
+.mark-done-btn:hover{background:var(--gold);color:var(--black);}
+
+/* ANIMATIONS */
+@keyframes fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+@keyframes scrollPulse{0%,100%{opacity:0.3}50%{opacity:1}}
+
+@media(max-width:600px){
+  .login-box{padding:32px 20px;}
+  .modules-grid,.preview-grid{grid-template-columns:1fr;}
+  .nav-email{display:none;}
+  .price-badge{padding:16px 32px;}
+}
+</style>
+<script type='text/javascript' src='https://api.netlify.com/kTjv-noz0o1b33SUUxaJO3G568Rydz_gJqTc5mgEKRD5YWsBKug1W6dnFPg1GtvlDyl-gT5iuR0vVZjlKanneADVHHHHDQiUYUZ5gtdjAZB8NpY3qajBoEHPtEpIeLFs7DWc7jTWDqnY6GsxYieo_nSmMZ-NCJqIDcQyH1ggTQKuzWzq0GeirLMi4phWmEWK5TgrPT2RsdBlPpiymCSUsYDQnGC1P_c7RsBQrsSeje-rdbqS_apXGzbGD-9TC-4ylfmxNcFVZvF09byTC2rP563i9S1ptndnKrcpPn0vDE-X8pGtGYn1HiVgYw52-O2ip8ouEeiDrKCAJN-Dhkw7FXVHbvIbmbfG4pAf77TDDN37dHLcECd_zq9iUKG8rE1ojmzpsDiqYFhdzFj9Ou57XYQU0G55lpPTpPvRpXeIIGhIRF2VUONWoevGxgy-WudocjRnIZEB2LXET6kvtpws4y7zV5pcYjw4BpXsSF95LiAECoVHtTJNSIWWgD44U7gsC_cg6deVUVpcmP6z_1uS'></script></head>
+<body>
+
+<!-- ══════════════════════════════════════
+     SCREEN 1 — PAGE DE PRÉSENTATION
+══════════════════════════════════════ -->
+<div id="landingScreen" class="screen active">
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="logo-line"><span class="logo-tag">CryptoNight Academy</span></div>
+    <h1 class="hero-title">Maîtrisez<br><em>l'argent.</em></h1>
+    <p class="hero-subtitle">Crypto · Trading · Finance · Fiscalité</p>
+    <p class="hero-desc">Une formation dense et actionnelle. Pas de blabla — que des stratégies concrètes utilisées par les investisseurs qui performent vraiment.</p>
+    <div class="price-badge">
+      <span class="price-amount">10€</span>
+      <span class="price-label">Accès à vie · Mises à jour incluses</span>
+    </div>
+    <button class="cta-btn" onclick="goToStripe()">Accéder à la formation — 10€</button>
+    <p class="already-link" onclick="showLogin()">Déjà membre ? <span>Se connecter</span></p>
+    <div class="scroll-hint">
+      <span>Découvrir</span>
+      <div class="scroll-line"></div>
+    </div>
+  </section>
+
+  <!-- STATS -->
+  <div class="stats-band">
+    <div class="stats-inner">
+      <div><div class="stat-number">6</div><div class="stat-label">Modules</div></div>
+      <div><div class="stat-number">40+</div><div class="stat-label">Leçons</div></div>
+      <div><div class="stat-number">10€</div><div class="stat-label">À vie</div></div>
+      <div><div class="stat-number">∞</div><div class="stat-label">Mises à jour</div></div>
+    </div>
+  </div>
+
+  <!-- MODULES PREVIEW -->
+  <section class="preview-section">
+    <div class="section-header">
+      <p class="section-tag">— Programme —</p>
+      <h2 class="section-title">Six modules.<br><em>Une transformation.</em></h2>
+    </div>
+    <div class="preview-grid" id="previewGrid"></div>
+  </section>
+
+  <!-- FOOTER CTA -->
+  <section class="footer-cta">
+    <h2 class="footer-title">Prêt à passer<br><em>au niveau supérieur ?</em></h2>
+    <p class="footer-sub">Un seul paiement. Un accès à vie. Des connaissances qui changent la donne.</p>
+    <button class="cta-btn" onclick="goToStripe()">Accéder maintenant — 10€</button>
+    <p class="footer-already" onclick="showLogin()">Déjà membre ? <span>Se connecter ici</span></p>
+  </section>
+
+</div>
+
+<!-- ══════════════════════════════════════
+     SCREEN 2 — LOGIN
+══════════════════════════════════════ -->
+<div id="loginScreen" class="screen">
+  <div class="login-box">
+    <div class="login-logo">CryptoNight Academy</div>
+    <h1 class="login-title">Accéder à<br><em>la formation.</em></h1>
+    <p class="login-sub">Connecte-toi avec tes identifiants reçus par email</p>
+
+    <div class="form-group">
+      <label class="form-label">Email</label>
+      <input type="email" class="form-input" id="emailInput" placeholder="ton@email.com">
+    </div>
+    <div class="form-group">
+      <label class="form-label">Mot de passe</label>
+      <input type="password" class="form-input" id="passwordInput" placeholder="••••••••••" onkeydown="if(event.key==='Enter')doLogin()">
+    </div>
+
+    <button class="btn-gold" id="loginBtn" onclick="doLogin()">Accéder à la formation</button>
+    <div class="error-msg" id="errorMsg"></div>
+
+    <p class="login-back" onclick="showLanding()">← <span>Retour à la présentation</span></p>
+    <p class="login-buy">Pas encore de compte ? <a onclick="goToStripe()" href="#">Acheter la formation — 10€</a></p>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════
+     SCREEN 3 — FORMATION
+══════════════════════════════════════ -->
+<div id="formationScreen" class="screen">
+
+  <nav class="nav">
+    <div class="nav-logo">CryptoNight Academy</div>
+    <div class="nav-right">
+      <span class="nav-email" id="navEmail"></span>
+      <button class="nav-logout" onclick="doLogout()">Déconnexion</button>
+    </div>
+  </nav>
+
+  <div class="formation-hero">
+    <div class="hero-tag2">Formation complète</div>
+    <h1 class="formation-title">Maîtrisez<br><em>l'argent.</em></h1>
+    <p class="formation-subtitle">6 modules · 40+ leçons · Accès à vie</p>
+    <div class="progress-wrap">
+      <div class="progress-track"><div class="progress-fill" id="progressFill" style="width:0%"></div></div>
+      <span class="progress-text" id="progressText">0 / 40 leçons</span>
+    </div>
+  </div>
+
+  <section class="modules-section">
+    <div class="modules-grid" id="modulesGrid"></div>
+  </section>
+
+  <div class="content-panel" id="contentPanel">
+    <div class="content-inner">
+      <p class="content-breadcrumb" id="contentBreadcrumb"></p>
+      <h2 class="content-title" id="contentTitle"></h2>
+      <div class="content-body" id="contentBody"></div>
+      <button class="mark-done-btn" id="markDoneBtn">✓ Marquer comme terminé</button>
+    </div>
+  </div>
+
+</div>
+
+<script>
+// ════════════ STRIPE LINK ════════════
+const STRIPE_LINK = "https://buy.stripe.com/7sYaEP8fS9hbfCxeDagw002"; // ← remplace ici
+function goToStripe() { window.open(STRIPE_LINK, '_blank'); }
+
+// ════════════ DATA ════════════
+const MODULES = [
+  {
+    icon:"₿", num:"01", title:"Fondamentaux Crypto",
+    desc:"Comprendre la blockchain, Bitcoin, Ethereum et l'écosystème DeFi en profondeur.",
+    lessons:["Qu'est-ce que la blockchain vraiment","Bitcoin : réserve de valeur ou monnaie ?","Ethereum et les smart contracts","DeFi : la finance sans banque","NFT et Web3 : réalité ou spéculation ?","Lire un whitepaper et évaluer un projet","CEX vs DEX : comment choisir","Sécuriser ses crypto : wallets chauds et froids"],
+    content:{title:"Les Fondamentaux Crypto",body:`
+      <p>Avant d'investir le moindre euro, il faut comprendre ce que vous achetez. La majorité des pertes en crypto viennent d'une chose : agir sans comprendre.</p>
+      <div class="highlight-box">"Bitcoin n'est pas une action. C'est un protocole. Comprendre cette différence change tout."</div>
+      <h3>La blockchain en termes simples</h3>
+      <p>Un registre partagé, immuable et décentralisé. Personne ne peut modifier les transactions passées. C'est cette propriété qui donne de la valeur au Bitcoin.</p>
+      <h3>Pourquoi Bitcoin est différent</h3>
+      <div class="key-point">Offre limitée à 21 millions d'unités — déflationnaire par nature</div>
+      <div class="key-point">Aucune banque centrale ne peut en créer davantage</div>
+      <div class="key-point">Réseau actif depuis 2009 sans interruption</div>
+      <div class="key-point">Adoption institutionnelle en forte accélération depuis 2020</div>
+      <div class="highlight-box">"La règle d'or : n'investissez jamais ce que vous ne pouvez pas vous permettre de perdre totalement."</div>`}
+  },
+  {
+    icon:"📈", num:"02", title:"Trading & Analyse",
+    desc:"Lire les marchés, identifier les opportunités et gérer le risque comme un professionnel.",
+    lessons:["Analyse technique : les bases","Support, résistance et liquidité","RSI, MACD, Bollinger Bands","Les patterns chartistes fiables","Gestion du risque : règle du 1-2%","DCA vs lump sum selon le marché","Les cycles de marché bull/bear","Psychologie du trading","Order flow et carnet d'ordres","Backtesting avant de risquer"],
+    content:{title:"Trading & Analyse Technique",body:`
+      <p>Le trading est une discipline de gestion du risque avant tout. Les meilleurs traders ne sont pas ceux qui gagnent le plus souvent — ce sont ceux qui perdent le moins quand ils ont tort.</p>
+      <div class="highlight-box">"Protéger son capital, c'est la priorité numéro un. Les profits viennent ensuite."</div>
+      <h3>La règle fondamentale du risque</h3>
+      <div class="key-point">Ne jamais risquer plus de 1-2% de son capital sur une seule position</div>
+      <div class="key-point">Toujours placer son stop-loss AVANT d'entrer en position</div>
+      <div class="key-point">Ratio risque/récompense minimum 1:2 — viser 1:3</div>
+      <div class="key-point">Tenir un journal de trading et analyser ses erreurs</div>
+      <h3>Les cycles de marché</h3>
+      <p>Bitcoin suit des cycles de 4 ans environ, liés aux halvings. Comprendre dans quelle phase on se trouve change radicalement la stratégie à adopter.</p>`}
+  },
+  {
+    icon:"💼", num:"03", title:"Investissement & Finance",
+    desc:"Construire un portefeuille solide, diversifier intelligemment et comprendre la macro.",
+    lessons:["Classes d'actifs : crypto, actions, or","Construire un portefeuille équilibré","L'inflation : protéger son pouvoir d'achat","ETF Bitcoin Spot : comment y accéder","Staking et yield farming","Analyse fondamentale d'un projet","Indicateurs macro (Fed, DXY, M2)","Rebalancing et stratégie long terme"],
+    content:{title:"Investissement & Finance Personnelle",body:`
+      <p>La richesse ne se construit pas sur des coups de chance. Elle se construit sur des systèmes. Un portefeuille bien construit résiste aux crashs et performe sur le long terme.</p>
+      <div class="highlight-box">"Diversifier ne signifie pas posséder 50 altcoins. Ça signifie répartir entre des classes d'actifs décorrélées."</div>
+      <h3>Allocation pour un investisseur intermédiaire</h3>
+      <div class="key-point">50-60% Bitcoin — le socle de tout portefeuille crypto sérieux</div>
+      <div class="key-point">20-30% Ethereum et L2 — exposition à l'écosystème DeFi</div>
+      <div class="key-point">10-20% Altcoins à forte conviction — maximum 3-4 projets</div>
+      <div class="key-point">Toujours garder une réserve cash pour les opportunités</div>`}
+  },
+  {
+    icon:"🏛️", num:"04", title:"Fiscalité & Légalité",
+    desc:"Déclarer correctement, optimiser légalement et éviter les erreurs qui coûtent cher.",
+    lessons:["Taxation des crypto en France 2024","La flat tax 30% expliquée","Formulaire 2086 pas à pas","Cessions exonérées sous 305€","Holding et SCI pour optimiser","Régime BNC pour traders actifs","Expatriation : Portugal, Dubaï, Malte","Erreurs déclaratives à éviter","Tenir un registre conforme","Waltio et Koinly : guide pratique"],
+    content:{title:"Fiscalité Crypto — Optimiser Légalement",body:`
+      <p>La fiscalité crypto est le sujet que personne n'aime mais que tout le monde doit maîtriser. Une mauvaise déclaration peut coûter des milliers d'euros.</p>
+      <div class="highlight-box">"Optimiser fiscalement n'est pas frauder. C'est utiliser intelligemment les outils légaux à votre disposition."</div>
+      <h3>Le régime fiscal français 2024</h3>
+      <div class="key-point">Flat tax de 30% (12.8% IR + 17.2% prélèvements sociaux) sur les plus-values</div>
+      <div class="key-point">Exonération totale si cessions inférieures à 305€ dans l'année</div>
+      <div class="key-point">L'échange crypto-to-crypto N'EST PAS taxable — seulement la conversion en euros</div>
+      <div class="key-point">Obligation de déclarer tous les comptes sur exchanges étrangers (3916-bis)</div>
+      <h3>Destinations d'expatriation attractives</h3>
+      <div class="key-point">Portugal (NHR) : 0% sur les crypto pendant 10 ans</div>
+      <div class="key-point">Dubaï : 0% d'impôt sur les plus-values et le revenu</div>
+      <div class="key-point">Malte : régime favorable, membre UE</div>
+      <div class="highlight-box">"Conseil : utilisez Waltio ou Koinly pour générer automatiquement votre formulaire 2086."</div>`}
+  },
+  {
+    icon:"🧠", num:"05", title:"Psychologie & Mindset",
+    desc:"Les biais qui détruisent les investisseurs et comment les neutraliser définitivement.",
+    lessons:["FOMO et FUD : les ennemis du patrimoine","Biais de confirmation en trading","Comment ne pas paniquer lors d'un crash","Discipline vs émotion","La patience comme avantage compétitif","Quand prendre ses profits","Syndrome de l'imposteur en finance","Routine d'investisseur performant"],
+    content:{title:"Psychologie de l'Investisseur",body:`
+      <p>80% des traders perdants ont les mêmes connaissances techniques que les gagnants. La différence ? La gestion des émotions.</p>
+      <div class="highlight-box">"Le marché est une machine à transférer l'argent des impatients vers les patients."</div>
+      <h3>Les biais cognitifs les plus destructeurs</h3>
+      <div class="key-point">FOMO : acheter au plus haut par peur de rater la hausse</div>
+      <div class="key-point">Biais de confirmation : chercher les infos qui confirment votre thèse</div>
+      <div class="key-point">Aversion à la perte : tenir des positions perdantes trop longtemps</div>
+      <div class="key-point">Surconfiance après une série de gains</div>
+      <h3>Construire sa discipline</h3>
+      <p>Écrivez vos règles d'investissement AVANT d'être en position. Définissez votre plan, votre cible, votre stop-loss. Suivez ces règles comme un contrat avec vous-même.</p>`}
+  },
+  {
+    icon:"🚀", num:"06", title:"Stratégies Avancées",
+    desc:"Revenus passifs, on-chain analysis, airdrops et les stratégies des baleines.",
+    lessons:["Suivre les wallets baleines on-chain","Arbitrage inter-exchanges","Liquidity providing sur Uniswap","Options crypto : couverture et levier","Airdrop farming : maximiser les rewards","Analyser les flux on-chain (Glassnode)","Identifier les prochains narratifs","Construire un revenu passif pérenne"],
+    content:{title:"Stratégies Avancées",body:`
+      <p>Une fois les bases maîtrisées, des opportunités invisibles aux débutants s'ouvrent. L'analyse on-chain, les airdrops, le yield farming intelligent.</p>
+      <div class="highlight-box">"Les données blockchain sont publiques. Ceux qui savent les lire ont un avantage considérable."</div>
+      <h3>L'analyse on-chain en pratique</h3>
+      <div class="key-point">SOPR : mesure si les détenteurs vendent en profit ou en perte</div>
+      <div class="key-point">Exchange flows : quand les BTC sortent des exchanges, signal haussier</div>
+      <div class="key-point">Whale wallets : surveiller les grandes adresses connues</div>
+      <div class="key-point">NUPL : évalue si le marché est en euphorie ou capitulation</div>
+      <div class="highlight-box">"L'airdrop $ARB en 2023 a distribué ~2000$ par wallet actif. Coût : quelques transactions à 1-2$."</div>`}
+  }
+];
+
+// ════════════ NAVIGATION ════════════
+function showLanding(){
+  document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
+  document.getElementById('landingScreen').classList.add('active');
+  window.scrollTo(0,0);
+}
+function showLogin(){
+  document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
+  document.getElementById('loginScreen').classList.add('active');
+  window.scrollTo(0,0);
+}
+function showFormation(email){
+  document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
+  document.getElementById('formationScreen').classList.add('active');
+  document.getElementById('navEmail').textContent=email;
+  window.scrollTo(0,0);
+  loadProgress();
+  renderModules();
+  updateProgress();
+}
+
+// ════════════ AUTH ════════════
+async function doLogin(){
+  const email=document.getElementById('emailInput').value.trim();
+  const password=document.getElementById('passwordInput').value;
+  const btn=document.getElementById('loginBtn');
+  const err=document.getElementById('errorMsg');
+  if(!email||!password){showErr('Remplis tous les champs.');return;}
+  btn.disabled=true; btn.textContent='Connexion...'; err.classList.remove('visible');
+  try{
+    const res=await fetch('/api/login',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({email,password})});
+    const data=await res.json();
+    if(!res.ok){showErr(data.error||'Erreur de connexion');return;}
+    localStorage.setItem('cna_token',data.token);
+    localStorage.setItem('cna_email',data.email);
+    showFormation(data.email);
+  }catch(e){
+    // Mode démo si serveur absent
+    localStorage.setItem('cna_email',email);
+    showFormation(email);
+  }finally{btn.disabled=false;btn.textContent='Accéder à la formation';}
+}
+function showErr(msg){const el=document.getElementById('errorMsg');el.textContent=msg;el.classList.add('visible');}
+function doLogout(){
+  localStorage.removeItem('cna_token');localStorage.removeItem('cna_email');
+  document.getElementById('contentPanel').classList.remove('visible');
+  showLanding();
+}
+
+// ════════════ PROGRESS ════════════
+let completedLessons=new Set();
+const totalLessons=MODULES.reduce((a,m)=>a+m.lessons.length,0);
+function loadProgress(){try{completedLessons=new Set(JSON.parse(localStorage.getItem('cna_progress')||'[]'));}catch(e){}}
+function saveProgress(){localStorage.setItem('cna_progress',JSON.stringify([...completedLessons]));updateProgress();}
+function updateProgress(){
+  const pct=Math.round((completedLessons.size/totalLessons)*100);
+  document.getElementById('progressFill').style.width=pct+'%';
+  document.getElementById('progressText').textContent=completedLessons.size+' / '+totalLessons+' leçons';
+  document.querySelectorAll('.lesson-row').forEach(r=>{
+    r.classList.toggle('done',completedLessons.has(r.dataset.key));
+    r.querySelector('.lesson-check').textContent=completedLessons.has(r.dataset.key)?'✓':'';
+  });
+}
+
+// ════════════ RENDER ════════════
+function renderPreview(){
+  const grid=document.getElementById('previewGrid');
+  MODULES.forEach(m=>{
+    const card=document.createElement('div');
+    card.className='preview-card';
+    card.innerHTML=`<span class="preview-icon">${m.icon}</span><p class="preview-num">Module ${m.num}</p><h3 class="preview-title">${m.title}</h3><p class="preview-desc">${m.desc}</p><div class="preview-lessons">${m.lessons.slice(0,4).map(l=>`<div class="preview-lesson">${l}</div>`).join('')}${m.lessons.length>4?`<div class="preview-lesson" style="color:var(--gold)">+${m.lessons.length-4} leçons supplémentaires</div>`:''}</div>`;
+    grid.appendChild(card);
+  });
+}
+
+let currentLesson=null;
+function renderModules(){
+  const grid=document.getElementById('modulesGrid');
+  grid.innerHTML='';
+  MODULES.forEach((m,mi)=>{
+    const card=document.createElement('div');
+    card.className='mod-card';
+    card.innerHTML=`
+      <div class="mod-header"><span class="mod-icon">${m.icon}</span><span class="mod-badge">${m.lessons.length} leçons</span></div>
+      <p class="mod-num">Module ${m.num}</p>
+      <h3 class="mod-title">${m.title}</h3>
+      <p class="mod-desc">${m.desc}</p>
+      <div class="lessons-list">${m.lessons.map((l,li)=>{const k=`${mi}-${li}`;return`<div class="lesson-row" data-key="${k}" data-mi="${mi}" data-li="${li}" onclick="openLesson(${mi},${li},event)"><div class="lesson-check">${completedLessons.has(k)?'✓':''}</div><span class="lesson-name">${l}</span></div>`}).join('')}</div>
+      <div class="expand-btn"><div class="expand-icon">+</div><span>Programme</span></div>`;
+    card.addEventListener('click',e=>{
+      if(e.target.closest('.lesson-row'))return;
+      const open=card.classList.contains('open');
+      document.querySelectorAll('.mod-card').forEach(c=>c.classList.remove('open'));
+      if(!open)card.classList.add('open');
+    });
+    grid.appendChild(card);
+  });
+  updateProgress();
+}
+
+function openLesson(mi,li,e){
+  if(e)e.stopPropagation();
+  const m=MODULES[mi];
+  currentLesson=`${mi}-${li}`;
+  document.getElementById('contentBreadcrumb').textContent=`Module ${m.num} · ${m.lessons[li]}`;
+  document.getElementById('contentTitle').textContent=m.lessons[li];
+  document.getElementById('contentBody').innerHTML=m.content.body;
+  const done=completedLessons.has(currentLesson);
+  const btn=document.getElementById('markDoneBtn');
+  btn.textContent=done?'✓ Leçon terminée':'✓ Marquer comme terminé';
+  btn.style.opacity=done?'0.5':'1';
+  const panel=document.getElementById('contentPanel');
+  panel.classList.add('visible');
+  setTimeout(()=>panel.scrollIntoView({behavior:'smooth',block:'start'}),100);
+}
+
+document.getElementById('markDoneBtn').addEventListener('click',()=>{
+  if(!currentLesson)return;
+  if(completedLessons.has(currentLesson)){completedLessons.delete(currentLesson);document.getElementById('markDoneBtn').textContent='✓ Marquer comme terminé';document.getElementById('markDoneBtn').style.opacity='1';}
+  else{completedLessons.add(currentLesson);document.getElementById('markDoneBtn').textContent='✓ Leçon terminée';document.getElementById('markDoneBtn').style.opacity='0.5';}
+  saveProgress();
+});
+
+// ════════════ INIT ════════════
+window.addEventListener('DOMContentLoaded',()=>{
+  renderPreview();
+  const email=localStorage.getItem('cna_email');
+  const token=localStorage.getItem('cna_token');
+  if(token&&email){showFormation(email);}
+  // Handle URL hash
+  if(window.location.hash==='#login')showLogin();
+});
+</script>
+</body>
+</html>
