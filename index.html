@@ -576,7 +576,7 @@ async function doLogin(){
   if(!email||!password){showErr('Remplis tous les champs.');return;}
   btn.disabled=true;btn.textContent='Connexion...';err.classList.remove('visible');
   try{
-    const res=await fetch('https://login-formation.thomas86renault.workers.dev/',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({email,password})});
+    const res=await fetch('https://login-formation.thomas86renault.workers.dev',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({email,password})});
     const data=await res.json();
     if(!res.ok){showErr(data.error||'Erreur de connexion');return;}
     localStorage.setItem('cna_token',data.token);
