@@ -583,9 +583,8 @@ async function doLogin(){
     localStorage.setItem('cna_token',data.token);
     localStorage.setItem('cna_email',data.email);
     showFormation(data.email);
-  }catch(e){
-    localStorage.setItem('cna_email',email);
-    showFormation(email);
+}catch(e){
+    showErr('Serveur indisponible. Réessaie dans quelques instants.');
   }finally{btn.disabled=false;btn.textContent='Accéder à la formation';}
 }
 function showErr(msg){const el=document.getElementById('errorMsg');el.textContent=msg;el.classList.add('visible');}
