@@ -772,7 +772,10 @@ document.getElementById('markDoneBtn').addEventListener('click',()=>{
 
 // ── INIT ───────────────────────────────────────────────────────
 window.addEventListener('DOMContentLoaded',()=>{
+  renderPreview();
   showLanding();
+  if(window.location.hash==='#login')showLogin();
+});
     // Vérifie que le token est toujours valide
     fetch('https://login-formation.thomas86renault.workers.dev',{
       method:'POST',
