@@ -36,7 +36,7 @@ body::before{content:'';position:fixed;inset:0;background-image:url("data:image/
 .already-link{display:block;margin-top:20px;font-size:11px;color:var(--white-dim);cursor:pointer;opacity:0;animation:fadeUp 1s ease 1.4s forwards;transition:color 0.2s;}
 .already-link:hover{color:var(--gold);}
 .already-link span{border-bottom:1px solid rgba(201,169,110,0.3);}
-.stats-band{background:var(--black-3);border-top:1px solid rgba(201,169,110,0.1);border-bottom:1px solid rgba(201,169,110,0.1);padding:60px 24px;}
+.stats-band{background:var(--black-3);border-top:1px solid rgba(201,169,110,0.1);border-bottom:1px solid rgba(201,169,110,0.1);padding:60px 24px;}H
 .stats-inner{max-width:900px;margin:0 auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:40px;text-align:center;}
 .stat-number{font-family:'Cormorant Garamond',serif;font-size:52px;font-weight:300;color:var(--gold);line-height:1;margin-bottom:8px;}
 .stat-label{font-size:9px;letter-spacing:2px;color:var(--white-dim);text-transform:uppercase;}
@@ -522,12 +522,12 @@ let currentLesson=null;
 let currentModuleIdx=null;
 
 function loadProgress(){
-  try{completedLessons=new Set(JSON.parse(localStorage.getItem('cna_progress')||'[]'));}catch(e){}
-  try{quizScores=JSON.parse(localStorage.getItem('cna_scores')||'{}');}catch(e){}
+  try{completedLessons=new Set(JSON.parse(sessionStorage.getItem('cna_progress')||'[]'));}catch(e){}
+  try{quizScores=JSON.parse(sessionStorage.getItem('cna_scores')||'{}');}catch(e){}
 }
 function saveProgress(){
-  localStorage.setItem('cna_progress',JSON.stringify([...completedLessons]));
-  localStorage.setItem('cna_scores',JSON.stringify(quizScores));
+  sessionStorage.setItem('cna_progress',JSON.stringify([...completedLessons]));
+  sessionStorage.setItem('cna_scores',JSON.stringify(quizScores));
   updateProgress();
   updateGlobalScore();
 }
@@ -565,7 +565,7 @@ function showFormation(email){
   updateProgress();
   updateGlobalScore();
 }
-function doLogout(){localStorage.removeItem('cna_token');localStorage.removeItem('cna_email');document.getElementById('contentPanel').classList.remove('visible');showLanding();}
+function doLogout(){sessionStorage.removeItem('cna_token');sessionStorage.removeItem('cna_email');document.getElementById('contentPanel').classList.remove('visible');showLanding();}
 
 // ── AUTH ───────────────────────────────────────────────────────
 async function doLogin(){
@@ -579,8 +579,8 @@ async function doLogin(){
     const res=await fetch('https://login-formation.thomas86renault.workers.dev',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({email,password})});
     const data=await res.json();
     if(!res.ok){showErr(data.error||'Erreur de connexion');return;}
-    localStorage.setItem('cna_token',data.token);
-    localStorage.setItem('cna_email',data.email);
+    sessionStorage.setItem('cna_token',data.token);
+    sessionStorage.setItem('cna_email',data.email);
     showFormation(data.email);
 }catch(e){
     showErr('Serveur indisponible. Réessaie dans quelques instants.');
@@ -780,8 +780,8 @@ window.addEventListener('DOMContentLoaded',()=>{
       body:JSON.stringify({email,password:token})
     }).then(r=>{
       if(r.ok)showFormation(email);
-      else{localStorage.clear();showLanding();}
-    }).catch(()=>{localStorage.clear();showLanding();});
+      else{sessionStorage.clear();showLanding();}
+    }).catch(()=>{sessionStorage.clear();showLanding();});
   } else {
     showLanding();
   }
