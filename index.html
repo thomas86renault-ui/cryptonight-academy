@@ -772,9 +772,7 @@ document.getElementById('markDoneBtn').addEventListener('click',()=>{
 
 // ── INIT ───────────────────────────────────────────────────────
 window.addEventListener('DOMContentLoaded',()=>{
-  const email=localStorage.getItem('cna_email');
-  const token=localStorage.getItem('cna_token');
-  if(token&&email){
+  showLanding();
     // Vérifie que le token est toujours valide
     fetch('https://login-formation.thomas86renault.workers.dev',{
       method:'POST',
