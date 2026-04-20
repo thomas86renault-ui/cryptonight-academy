@@ -776,21 +776,6 @@ window.addEventListener('DOMContentLoaded',()=>{
   showLanding();
   if(window.location.hash==='#login')showLogin();
 });
-    // Vérifie que le token est toujours valide
-    fetch('https://login-formation.thomas86renault.workers.dev',{
-      method:'POST',
-      headers:{'Content-Type':'application/json'},
-      body:JSON.stringify({email,password:token})
-    }).then(r=>{
-      if(r.ok)showFormation(email);
-      else{sessionStorage.clear();showLanding();}
-    }).catch(()=>{sessionStorage.clear();showLanding();});
-  } else {
-    showLanding();
-  }
-});
-  if(window.location.hash==='#login')showLogin();
-});
 </script>
 </body>
 </html>
