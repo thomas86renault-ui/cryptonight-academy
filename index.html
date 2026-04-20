@@ -772,10 +772,22 @@ document.getElementById('markDoneBtn').addEventListener('click',()=>{
 
 // ── INIT ───────────────────────────────────────────────────────
 window.addEventListener('DOMContentLoaded',()=>{
-  renderPreview();
   const email=localStorage.getItem('cna_email');
   const token=localStorage.getItem('cna_token');
-  if(token&&email)showFormation(email);
+  if(token&&email){
+    // Vérifie que le token est toujours valide
+    fetch('https://login-formation.thomas86renault.workers.dev',{
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({email,password:token})
+    }).then(r=>{
+      if(r.ok)showFormation(email);
+      else{localStorage.clear();showLanding();}
+    }).catch(()=>{localStorage.clear();showLanding();});
+  } else {
+    showLanding();
+  }
+});
   if(window.location.hash==='#login')showLogin();
 });
 </script>
