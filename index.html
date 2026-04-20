@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -6,17 +7,24 @@
 <title>CryptoNight Academy</title>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
-:root{--gold:#C9A96E;--gold-light:#E8D5A3;--black:#080808;--black-2:#0F0F0F;--black-3:#161616;--black-4:#1E1E1E;--white:#F5F0E8;--white-dim:rgba(245,240,232,0.6);--white-faint:rgba(245,240,232,0.08);--red:#E05252;--green:#4CAF50;}
-*{margin:0;padding:0;box-sizing:border-box;}html{scroll-behavior:smooth;}
+:root{
+  --gold:#C9A96E;--gold-2:#E8D5A3;
+  --black:#080808;--black-2:#0F0F0F;--black-3:#161616;--black-4:#1E1E1E;
+  --white:#F5F0E8;--wd:rgba(245,240,232,0.6);--wf:rgba(245,240,232,0.08);
+  --red:#E05252;--green:#4CAF50;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
 body{background:var(--black);color:var(--white);font-family:'Montserrat',sans-serif;font-weight:300;overflow-x:hidden;min-height:100vh;}
 body::before{content:'';position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");pointer-events:none;z-index:999;opacity:0.4;}
+
+/* ── SCREENS ── */
 .screen{display:none;min-height:100vh;}
-.screen.active{display:block;}
 #landingScreen.active{display:block;}
-#loginScreen.active{display:flex;}
+#loginScreen.active{display:flex;align-items:center;justify-content:center;min-height:100vh;padding:24px;}
 #formationScreen.active{display:block;}
 
-/* LANDING */
+/* ── LANDING ── */
 .hero{position:relative;min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:40px 24px;overflow:hidden;}
 .hero::before{content:'';position:absolute;top:-200px;left:50%;transform:translateX(-50%);width:700px;height:700px;background:radial-gradient(circle,rgba(201,169,110,0.1) 0%,transparent 70%);pointer-events:none;}
 .hero::after{content:'';position:absolute;bottom:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--gold),transparent);}
@@ -25,21 +33,21 @@ body::before{content:'';position:fixed;inset:0;background-image:url("data:image/
 .logo-tag{font-size:10px;letter-spacing:4px;color:var(--gold);text-transform:uppercase;font-weight:500;}
 .hero-title{font-family:'Cormorant Garamond',serif;font-size:clamp(52px,11vw,100px);font-weight:300;line-height:0.95;letter-spacing:-1px;margin-bottom:8px;opacity:0;animation:fadeUp 1s ease 0.4s forwards;}
 .hero-title em{font-style:italic;color:var(--gold);}
-.hero-subtitle{font-family:'Cormorant Garamond',serif;font-size:clamp(18px,3.5vw,26px);font-weight:300;color:var(--white-dim);letter-spacing:2px;margin-bottom:40px;opacity:0;animation:fadeUp 1s ease 0.6s forwards;}
-.hero-desc{font-size:13px;color:var(--white-dim);max-width:500px;line-height:1.9;margin-bottom:56px;opacity:0;animation:fadeUp 1s ease 0.8s forwards;}
+.hero-subtitle{font-family:'Cormorant Garamond',serif;font-size:clamp(18px,3.5vw,26px);font-weight:300;color:var(--wd);letter-spacing:2px;margin-bottom:40px;opacity:0;animation:fadeUp 1s ease 0.6s forwards;}
+.hero-desc{font-size:13px;color:var(--wd);max-width:500px;line-height:1.9;margin-bottom:56px;opacity:0;animation:fadeUp 1s ease 0.8s forwards;}
 .price-badge{display:flex;flex-direction:column;align-items:center;border:1px solid rgba(201,169,110,0.3);padding:20px 56px;margin-bottom:32px;position:relative;opacity:0;animation:fadeUp 1s ease 1s forwards;width:fit-content;}
 .price-badge::before{content:'';position:absolute;inset:3px;border:1px solid rgba(201,169,110,0.08);}
 .price-amount{font-family:'Cormorant Garamond',serif;font-size:56px;font-weight:300;color:var(--gold);line-height:1;}
-.price-label{font-size:9px;letter-spacing:3px;color:var(--white-dim);text-transform:uppercase;margin-top:4px;}
+.price-label{font-size:9px;letter-spacing:3px;color:var(--wd);text-transform:uppercase;margin-top:4px;}
 .cta-btn{display:inline-block;background:var(--gold);color:var(--black);padding:16px 52px;font-size:11px;letter-spacing:3px;text-transform:uppercase;font-weight:600;cursor:pointer;border:none;transition:all 0.3s ease;opacity:0;animation:fadeUp 1s ease 1.2s forwards;font-family:'Montserrat',sans-serif;text-decoration:none;}
-.cta-btn:hover{background:var(--gold-light);letter-spacing:4px;}
-.already-link{display:block;margin-top:20px;font-size:11px;color:var(--white-dim);cursor:pointer;opacity:0;animation:fadeUp 1s ease 1.4s forwards;transition:color 0.2s;}
+.cta-btn:hover{background:var(--gold-2);letter-spacing:4px;}
+.already-link{display:block;margin-top:20px;font-size:11px;color:var(--wd);cursor:pointer;opacity:0;animation:fadeUp 1s ease 1.4s forwards;transition:color 0.2s;background:none;border:none;font-family:'Montserrat',sans-serif;}
 .already-link:hover{color:var(--gold);}
 .already-link span{border-bottom:1px solid rgba(201,169,110,0.3);}
-.stats-band{background:var(--black-3);border-top:1px solid rgba(201,169,110,0.1);border-bottom:1px solid rgba(201,169,110,0.1);padding:60px 24px;}H
+.stats-band{background:var(--black-3);border-top:1px solid rgba(201,169,110,0.1);border-bottom:1px solid rgba(201,169,110,0.1);padding:60px 24px;}
 .stats-inner{max-width:900px;margin:0 auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:40px;text-align:center;}
 .stat-number{font-family:'Cormorant Garamond',serif;font-size:52px;font-weight:300;color:var(--gold);line-height:1;margin-bottom:8px;}
-.stat-label{font-size:9px;letter-spacing:2px;color:var(--white-dim);text-transform:uppercase;}
+.stat-label{font-size:9px;letter-spacing:2px;color:var(--wd);text-transform:uppercase;}
 .preview-section{padding:100px 24px;max-width:1100px;margin:0 auto;}
 .section-header{text-align:center;margin-bottom:72px;}
 .section-tag{font-size:9px;letter-spacing:4px;color:var(--gold);text-transform:uppercase;margin-bottom:16px;}
@@ -53,18 +61,18 @@ body::before{content:'';position:fixed;inset:0;background-image:url("data:image/
 .preview-icon{font-size:28px;margin-bottom:16px;display:block;}
 .preview-num{font-size:9px;letter-spacing:3px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;}
 .preview-title{font-family:'Cormorant Garamond',serif;font-size:24px;font-weight:400;margin-bottom:10px;line-height:1.2;}
-.preview-desc{font-size:11px;color:var(--white-dim);line-height:1.7;}
+.preview-desc{font-size:11px;color:var(--wd);line-height:1.7;}
 .footer-cta{padding:120px 24px;text-align:center;position:relative;overflow:hidden;border-top:1px solid rgba(201,169,110,0.08);}
 .footer-cta::before{content:'';position:absolute;bottom:-200px;left:50%;transform:translateX(-50%);width:600px;height:600px;background:radial-gradient(circle,rgba(201,169,110,0.07) 0%,transparent 70%);pointer-events:none;}
 .footer-title{font-family:'Cormorant Garamond',serif;font-size:clamp(36px,7vw,72px);font-weight:300;line-height:1.1;margin-bottom:24px;}
 .footer-title em{font-style:italic;color:var(--gold);}
-.footer-sub{font-size:13px;color:var(--white-dim);margin-bottom:48px;max-width:420px;margin-left:auto;margin-right:auto;line-height:1.9;}
-.footer-already{display:block;margin-top:20px;font-size:11px;color:var(--white-dim);cursor:pointer;transition:color 0.2s;}
+.footer-sub{font-size:13px;color:var(--wd);margin-bottom:48px;max-width:420px;margin-left:auto;margin-right:auto;line-height:1.9;}
+.footer-already{display:block;margin-top:20px;font-size:11px;color:var(--wd);cursor:pointer;transition:color 0.2s;background:none;border:none;font-family:'Montserrat',sans-serif;}
 .footer-already:hover{color:var(--gold);}
 .footer-already span{border-bottom:1px solid rgba(201,169,110,0.3);}
 
-/* LOGIN */
-#loginScreen{align-items:center;justify-content:center;padding:24px;position:relative;overflow:hidden;}
+/* ── LOGIN ── */
+#loginScreen{position:relative;overflow:hidden;}
 #loginScreen::before{content:'';position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:600px;height:600px;background:radial-gradient(circle,rgba(201,169,110,0.07) 0%,transparent 70%);pointer-events:none;}
 .login-box{width:100%;max-width:420px;border:1px solid rgba(201,169,110,0.15);padding:48px 40px;position:relative;animation:fadeUp 0.7s ease forwards;}
 .login-box::before{content:'';position:absolute;inset:3px;border:1px solid rgba(201,169,110,0.05);pointer-events:none;}
@@ -73,48 +81,42 @@ body::before{content:'';position:fixed;inset:0;background-image:url("data:image/
 .login-logo::before,.login-logo::after{content:'';width:24px;height:1px;background:var(--gold);opacity:0.5;}
 .login-title{font-family:'Cormorant Garamond',serif;font-size:36px;font-weight:300;text-align:center;line-height:1.2;margin-bottom:6px;}
 .login-title em{font-style:italic;color:var(--gold);}
-.login-sub{font-size:11px;letter-spacing:1px;color:var(--white-dim);text-align:center;margin-bottom:36px;}
+.login-sub{font-size:11px;letter-spacing:1px;color:var(--wd);text-align:center;margin-bottom:36px;}
 .form-group{margin-bottom:18px;}
 .form-label{font-size:9px;letter-spacing:2px;color:var(--gold);text-transform:uppercase;display:block;margin-bottom:7px;}
 .form-input{width:100%;background:var(--black-3);border:1px solid rgba(201,169,110,0.1);color:var(--white);padding:13px 16px;font-family:'Montserrat',sans-serif;font-size:13px;font-weight:300;outline:none;transition:border-color 0.3s;}
 .form-input:focus{border-color:rgba(201,169,110,0.4);}
 .form-input::placeholder{color:rgba(245,240,232,0.2);}
 .btn-gold{width:100%;background:var(--gold);color:var(--black);border:none;padding:15px;font-family:'Montserrat',sans-serif;font-size:10px;letter-spacing:3px;text-transform:uppercase;font-weight:600;cursor:pointer;transition:all 0.3s;margin-top:8px;}
-.btn-gold:hover{background:var(--gold-light);}
+.btn-gold:hover{background:var(--gold-2);}
 .btn-gold:disabled{opacity:0.5;cursor:not-allowed;}
 .error-msg{background:rgba(224,82,82,0.08);border:1px solid rgba(224,82,82,0.25);color:var(--red);padding:11px 14px;font-size:11px;margin-top:14px;display:none;}
 .error-msg.visible{display:block;}
-.login-back{text-align:center;margin-top:20px;font-size:11px;color:var(--white-dim);cursor:pointer;transition:color 0.2s;}
+.login-back{text-align:center;margin-top:20px;font-size:11px;color:var(--wd);cursor:pointer;transition:color 0.2s;background:none;border:none;font-family:'Montserrat',sans-serif;width:100%;}
 .login-back:hover{color:var(--gold);}
 .login-back span{border-bottom:1px solid rgba(201,169,110,0.3);}
-.login-buy{text-align:center;margin-top:10px;font-size:11px;color:var(--white-dim);}
+.login-buy{text-align:center;margin-top:10px;font-size:11px;color:var(--wd);}
 .login-buy a{color:var(--gold);text-decoration:none;cursor:pointer;}
 
-/* FORMATION NAV */
+/* ── FORMATION ── */
 .nav{position:sticky;top:0;background:rgba(8,8,8,0.95);backdrop-filter:blur(20px);border-bottom:1px solid rgba(201,169,110,0.1);padding:0 24px;display:flex;align-items:center;justify-content:space-between;height:60px;z-index:100;}
 .nav-logo{font-size:9px;letter-spacing:3px;color:var(--gold);text-transform:uppercase;}
 .nav-right{display:flex;align-items:center;gap:20px;}
-.nav-email{font-size:11px;color:var(--white-dim);}
-.nav-logout{font-size:9px;letter-spacing:2px;color:var(--white-dim);text-transform:uppercase;cursor:pointer;border:1px solid rgba(245,240,232,0.1);padding:6px 14px;transition:all 0.2s;background:none;font-family:'Montserrat',sans-serif;}
+.nav-email{font-size:11px;color:var(--wd);}
+.nav-logout{font-size:9px;letter-spacing:2px;color:var(--wd);text-transform:uppercase;cursor:pointer;border:1px solid rgba(245,240,232,0.1);padding:6px 14px;transition:all 0.2s;background:none;font-family:'Montserrat',sans-serif;}
 .nav-logout:hover{border-color:var(--gold);color:var(--gold);}
-
-/* FORMATION HERO */
 .formation-hero{padding:72px 24px 56px;text-align:center;position:relative;overflow:hidden;}
 .formation-hero::after{content:'';position:absolute;bottom:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--gold),transparent);}
 .hero-tag2{font-size:9px;letter-spacing:4px;color:var(--gold);text-transform:uppercase;margin-bottom:20px;display:flex;align-items:center;justify-content:center;gap:12px;}
 .hero-tag2::before,.hero-tag2::after{content:'';width:32px;height:1px;background:var(--gold);opacity:0.5;}
 .formation-title{font-family:'Cormorant Garamond',serif;font-size:clamp(40px,8vw,80px);font-weight:300;line-height:1;margin-bottom:12px;}
 .formation-title em{font-style:italic;color:var(--gold);}
-.formation-subtitle{font-size:12px;color:var(--white-dim);letter-spacing:1px;}
+.formation-subtitle{font-size:12px;color:var(--wd);letter-spacing:1px;}
 .progress-wrap{max-width:700px;margin:36px auto 0;padding:0 24px;display:flex;align-items:center;gap:16px;}
-.progress-track{flex:1;height:1px;background:rgba(201,169,110,0.1);position:relative;}
+.progress-track{flex:1;height:1px;background:rgba(201,169,110,0.1);}
 .progress-fill{height:2px;background:var(--gold);margin-top:-0.5px;transition:width 0.5s ease;}
 .progress-text{font-size:10px;letter-spacing:2px;color:var(--gold);white-space:nowrap;}
-
-/* SCORE BADGE */
 .score-badge{display:inline-flex;align-items:center;gap:8px;background:rgba(201,169,110,0.08);border:1px solid rgba(201,169,110,0.2);padding:6px 16px;margin-top:12px;font-size:11px;color:var(--gold);letter-spacing:1px;}
-
-/* MODULES */
 .modules-section{max-width:1100px;margin:0 auto;padding:56px 24px 100px;}
 .modules-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:2px;}
 .mod-card{background:var(--black-3);padding:32px 26px;cursor:pointer;transition:all 0.3s;border:1px solid rgba(201,169,110,0.05);position:relative;overflow:hidden;}
@@ -126,80 +128,68 @@ body::before{content:'';position:fixed;inset:0;background-image:url("data:image/
 .mod-badge{font-size:9px;letter-spacing:2px;color:var(--gold);border:1px solid rgba(201,169,110,0.25);padding:3px 8px;text-transform:uppercase;}
 .mod-num{font-size:9px;letter-spacing:3px;color:var(--gold);text-transform:uppercase;margin-bottom:5px;}
 .mod-title{font-family:'Cormorant Garamond',serif;font-size:23px;font-weight:400;margin-bottom:8px;line-height:1.2;}
-.mod-desc{font-size:11px;color:var(--white-dim);line-height:1.7;margin-bottom:18px;}
+.mod-desc{font-size:11px;color:var(--wd);line-height:1.7;margin-bottom:18px;}
 .lessons-list{display:none;flex-direction:column;}
 .mod-card.open .lessons-list{display:flex;}
-.lesson-row{display:flex;align-items:center;gap:10px;padding:9px 0;border-top:1px solid var(--white-faint);cursor:pointer;transition:all 0.2s;}
+.lesson-row{display:flex;align-items:center;gap:10px;padding:9px 0;border-top:1px solid var(--wf);cursor:pointer;transition:all 0.2s;}
 .lesson-row:hover{padding-left:6px;}
 .lesson-row:hover .lesson-name{color:var(--gold);}
 .lesson-check{width:17px;height:17px;border:1px solid rgba(201,169,110,0.3);border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:9px;transition:all 0.2s;}
 .lesson-row.done .lesson-check{background:var(--gold);border-color:var(--gold);color:var(--black);}
-.lesson-name{font-size:11px;color:var(--white-dim);line-height:1.4;transition:color 0.2s;flex:1;}
+.lesson-name{font-size:11px;color:var(--wd);line-height:1.4;transition:color 0.2s;flex:1;}
 .expand-btn{display:flex;align-items:center;gap:8px;font-size:9px;letter-spacing:2px;color:var(--gold);text-transform:uppercase;margin-top:14px;}
 .expand-icon{width:20px;height:20px;border:1px solid var(--gold);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:14px;transition:transform 0.3s;}
 .mod-card.open .expand-icon{transform:rotate(45deg);}
-
-/* CONTENT PANEL */
 .content-panel{background:var(--black-2);border-top:1px solid rgba(201,169,110,0.1);border-bottom:1px solid rgba(201,169,110,0.1);padding:64px 24px;display:none;}
 .content-panel.visible{display:block;}
 .content-inner{max-width:800px;margin:0 auto;}
 .content-breadcrumb{font-size:9px;letter-spacing:3px;color:var(--gold);text-transform:uppercase;margin-bottom:24px;}
 .content-title{font-family:'Cormorant Garamond',serif;font-size:clamp(30px,5vw,50px);font-weight:300;margin-bottom:28px;line-height:1.1;}
-.content-body{font-size:13px;line-height:2;color:var(--white-dim);}
+.content-body{font-size:13px;line-height:2;color:var(--wd);}
 .content-body h3{font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:400;color:var(--white);margin:32px 0 12px;}
 .content-body h4{font-size:13px;font-weight:600;color:var(--gold);margin:20px 0 8px;letter-spacing:1px;text-transform:uppercase;}
 .content-body p{margin-bottom:16px;}
 .highlight-box{border-left:2px solid var(--gold);padding:16px 24px;margin:24px 0;background:rgba(201,169,110,0.04);font-style:italic;font-family:'Cormorant Garamond',serif;font-size:17px;color:var(--white);line-height:1.6;}
-.key-point{display:flex;align-items:flex-start;gap:10px;font-size:13px;color:var(--white-dim);line-height:1.6;margin-bottom:10px;}
+.key-point{display:flex;align-items:flex-start;gap:10px;font-size:13px;color:var(--wd);line-height:1.6;margin-bottom:10px;}
 .key-point::before{content:'◆';color:var(--gold);font-size:7px;margin-top:6px;flex-shrink:0;}
-
-/* TABLES */
 .data-table{width:100%;border-collapse:collapse;margin:24px 0;font-size:12px;}
 .data-table th{background:rgba(201,169,110,0.1);color:var(--gold);font-size:9px;letter-spacing:2px;text-transform:uppercase;padding:12px 16px;text-align:left;border-bottom:1px solid rgba(201,169,110,0.2);}
-.data-table td{padding:11px 16px;border-bottom:1px solid var(--white-faint);color:var(--white-dim);}
+.data-table td{padding:11px 16px;border-bottom:1px solid var(--wf);color:var(--wd);}
 .data-table tr:hover td{background:rgba(201,169,110,0.03);color:var(--white);}
 .data-table .highlight{color:var(--gold);font-weight:500;}
 .data-table .good{color:#4CAF50;}
 .data-table .bad{color:var(--red);}
 .data-table .neutral{color:var(--gold);}
-
-/* QCM */
 .qcm-section{margin-top:48px;border-top:1px solid rgba(201,169,110,0.1);padding-top:40px;}
 .qcm-title{font-family:'Cormorant Garamond',serif;font-size:28px;font-weight:300;color:var(--white);margin-bottom:8px;}
-.qcm-subtitle{font-size:11px;color:var(--white-dim);margin-bottom:32px;letter-spacing:1px;}
+.qcm-subtitle{font-size:11px;color:var(--wd);margin-bottom:32px;letter-spacing:1px;}
 .question-block{margin-bottom:32px;padding:24px;background:var(--black-3);border:1px solid rgba(201,169,110,0.08);}
 .question-num{font-size:9px;letter-spacing:3px;color:var(--gold);text-transform:uppercase;margin-bottom:8px;}
 .question-text{font-size:14px;color:var(--white);line-height:1.6;margin-bottom:20px;font-weight:400;}
 .options{display:flex;flex-direction:column;gap:8px;}
-.option{display:flex;align-items:center;gap:12px;padding:12px 16px;background:var(--black-4);border:1px solid rgba(201,169,110,0.08);cursor:pointer;transition:all 0.2s;font-size:12px;color:var(--white-dim);}
+.option{display:flex;align-items:center;gap:12px;padding:12px 16px;background:var(--black-4);border:1px solid rgba(201,169,110,0.08);cursor:pointer;transition:all 0.2s;font-size:12px;color:var(--wd);}
 .option:hover{border-color:rgba(201,169,110,0.3);color:var(--white);}
 .option.selected{border-color:var(--gold);color:var(--white);background:rgba(201,169,110,0.06);}
 .option.correct{border-color:#4CAF50;background:rgba(76,175,80,0.08);color:#4CAF50;}
 .option.wrong{border-color:var(--red);background:rgba(224,82,82,0.08);color:var(--red);}
 .option-letter{width:24px;height:24px;border:1px solid rgba(201,169,110,0.3);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:10px;color:var(--gold);flex-shrink:0;}
 .option.selected .option-letter{background:var(--gold);color:var(--black);border-color:var(--gold);}
-.explanation{font-size:12px;padding:12px 16px;margin-top:8px;border-left:2px solid var(--gold);background:rgba(201,169,110,0.04);color:var(--white-dim);display:none;line-height:1.6;}
+.explanation{font-size:12px;padding:12px 16px;margin-top:8px;border-left:2px solid var(--gold);background:rgba(201,169,110,0.04);color:var(--wd);display:none;line-height:1.6;}
 .explanation.visible{display:block;}
-
-/* SCORE FINAL */
 .score-final{text-align:center;padding:40px;background:var(--black-3);border:1px solid rgba(201,169,110,0.2);margin-top:32px;display:none;}
 .score-final.visible{display:block;}
 .score-number{font-family:'Cormorant Garamond',serif;font-size:72px;font-weight:300;color:var(--gold);line-height:1;}
-.score-label{font-size:11px;letter-spacing:2px;color:var(--white-dim);text-transform:uppercase;margin-bottom:16px;}
+.score-label{font-size:11px;letter-spacing:2px;color:var(--wd);text-transform:uppercase;margin-bottom:16px;}
 .score-message{font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:300;color:var(--white);margin-bottom:24px;line-height:1.4;}
 .submit-qcm{background:var(--gold);color:var(--black);border:none;padding:14px 40px;font-family:'Montserrat',sans-serif;font-size:10px;letter-spacing:3px;text-transform:uppercase;font-weight:600;cursor:pointer;transition:all 0.3s;margin-top:24px;}
-.submit-qcm:hover{background:var(--gold-light);}
-.retry-btn{background:transparent;color:var(--gold);border:1px solid var(--gold);padding:12px 32px;font-family:'Montserrat',sans-serif;font-size:10px;letter-spacing:2px;text-transform:uppercase;cursor:pointer;transition:all 0.2s;margin-top:16px;}
+.submit-qcm:hover{background:var(--gold-2);}
+.retry-btn{background:transparent;color:var(--gold);border:1px solid var(--gold);padding:12px 32px;font-family:'Montserrat',sans-serif;font-size:10px;letter-spacing:2px;text-transform:uppercase;cursor:pointer;transition:all 0.2s;margin-top:16px;display:block;margin-left:auto;margin-right:auto;}
 .retry-btn:hover{background:var(--gold);color:var(--black);}
-
 .mark-done-btn{display:inline-flex;align-items:center;gap:8px;background:transparent;border:1px solid var(--gold);color:var(--gold);padding:11px 22px;font-family:'Montserrat',sans-serif;font-size:9px;letter-spacing:2px;text-transform:uppercase;cursor:pointer;margin-top:28px;transition:all 0.2s;}
 .mark-done-btn:hover{background:var(--gold);color:var(--black);}
-
-/* MODAL TID */
 #tid-modal{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.85);z-index:9999;align-items:center;justify-content:center;padding:24px;}
 .tid-box{background:#0F0F0F;border:1px solid rgba(201,169,110,0.3);padding:40px 32px;max-width:380px;width:100%;position:relative;text-align:center;}
 .tid-box::before{content:'';position:absolute;top:0;left:10%;right:10%;height:1px;background:linear-gradient(90deg,transparent,var(--gold),transparent);}
-
 @keyframes fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
 @media(max-width:600px){.login-box{padding:32px 20px;}.modules-grid,.preview-grid{grid-template-columns:1fr;}.nav-email{display:none;}.price-badge{padding:16px 32px;}}
 </style>
@@ -207,7 +197,7 @@ body::before{content:'';position:fixed;inset:0;background-image:url("data:image/
 <body>
 
 <!-- LANDING -->
-<div id="landingScreen" class="screen active">
+<div id="landingScreen" class="screen">
   <section class="hero">
     <div class="logo-line"><span class="logo-tag">CryptoNight Academy</span></div>
     <h1 class="hero-title">Maîtrisez<br><em>l'argent.</em></h1>
@@ -215,7 +205,7 @@ body::before{content:'';position:fixed;inset:0;background-image:url("data:image/
     <p class="hero-desc">Une formation dense et actionnelle. Pas de blabla — que des stratégies concrètes, des tableaux comparatifs et des quiz pour tester vos connaissances.</p>
     <div class="price-badge"><span class="price-amount">10€</span><span class="price-label">Accès à vie · Mises à jour incluses</span></div>
     <button class="cta-btn" onclick="goToStripe()">Accéder à la formation — 10€</button>
-    <p class="already-link" onclick="showLogin()">Déjà membre ? <span>Se connecter</span></p>
+    <button class="already-link" onclick="showLogin()">Déjà membre ? <span>Se connecter</span></button>
   </section>
   <div class="stats-band">
     <div class="stats-inner">
@@ -236,7 +226,7 @@ body::before{content:'';position:fixed;inset:0;background-image:url("data:image/
     <h2 class="footer-title">Prêt à passer<br><em>au niveau supérieur ?</em></h2>
     <p class="footer-sub">Un seul paiement. Un accès à vie. Des connaissances qui changent la donne.</p>
     <button class="cta-btn" onclick="goToStripe()">Accéder maintenant — 10€</button>
-    <p class="footer-already" onclick="showLogin()">Déjà membre ? <span>Se connecter ici</span></p>
+    <button class="footer-already" onclick="showLogin()">Déjà membre ? <span>Se connecter ici</span></button>
   </section>
 </div>
 
@@ -246,11 +236,17 @@ body::before{content:'';position:fixed;inset:0;background-image:url("data:image/
     <div class="login-logo">CryptoNight Academy</div>
     <h1 class="login-title">Accéder à<br><em>la formation.</em></h1>
     <p class="login-sub">Connecte-toi avec tes identifiants reçus par email</p>
-    <div class="form-group"><label class="form-label">Email</label><input type="email" class="form-input" id="emailInput" placeholder="ton@email.com"></div>
-    <div class="form-group"><label class="form-label">Mot de passe</label><input type="password" class="form-input" id="passwordInput" placeholder="••••••••••" onkeydown="if(event.key==='Enter')doLogin()"></div>
+    <div class="form-group">
+      <label class="form-label">Email</label>
+      <input type="email" class="form-input" id="emailInput" placeholder="ton@email.com">
+    </div>
+    <div class="form-group">
+      <label class="form-label">Mot de passe</label>
+      <input type="password" class="form-input" id="passwordInput" placeholder="••••••••••" onkeydown="if(event.key==='Enter')doLogin()">
+    </div>
     <button class="btn-gold" id="loginBtn" onclick="doLogin()">Accéder à la formation</button>
     <div class="error-msg" id="errorMsg"></div>
-    <p class="login-back" onclick="showLanding()">← <span>Retour à la présentation</span></p>
+    <button class="login-back" onclick="showLanding()">← <span>Retour à la présentation</span></button>
     <p class="login-buy">Pas encore de compte ? <a onclick="goToStripe()">Acheter — 10€</a></p>
   </div>
 </div>
@@ -302,297 +298,143 @@ body::before{content:'';position:fixed;inset:0;background-image:url("data:image/
 
 <script>
 const STRIPE_LINK = "https://buy.stripe.com/7sYaEP8fS9hbfCxeDagw002";
+const LOGIN_URL   = "https://login-formation.thomas86renault.workers.dev";
 
+// ── STRIPE / MODAL ──────────────────────────────────────────────
 function goToStripe(){
-  const urlParams=new URLSearchParams(window.location.search);
-  let tid=urlParams.get('tid');
-  if(tid){window.open(STRIPE_LINK+'?client_reference_id='+tid,'_blank');return;}
+  const tid = new URLSearchParams(window.location.search).get('tid');
+  if(tid){ window.open(STRIPE_LINK+'?client_reference_id='+tid,'_blank'); return; }
   document.getElementById('tid-modal').style.display='flex';
 }
 function confirmTid(){
-  const tid=document.getElementById('tid-input').value.trim();
-  if(!tid||isNaN(tid)){alert('Entre ton Telegram ID');return;}
+  const tid = document.getElementById('tid-input').value.trim();
+  if(!tid||isNaN(tid)){ alert('Entre ton Telegram ID'); return; }
   document.getElementById('tid-modal').style.display='none';
   window.open(STRIPE_LINK+'?client_reference_id='+tid,'_blank');
 }
-function skipTid() {
+function skipTid(){
   document.getElementById('tid-modal').style.display='none';
-  window.open('https://buy.stripe.com/7sYaEP8fS9hbfCxeDagw002','_blank');
+  window.open(STRIPE_LINK,'_blank');
 }
 
-// ── MODULES DATA ──────────────────────────────────────────────
-const MODULES=[
-{icon:"₿",num:"01",title:"Fondamentaux Crypto",desc:"Blockchain, Bitcoin, Ethereum, DeFi — les bases indispensables.",
-lessons:["Qu'est-ce que la blockchain vraiment","Bitcoin : réserve de valeur ou monnaie ?","Ethereum et les smart contracts","DeFi : la finance sans banque","NFT et Web3 : réalité ou spéculation ?","Lire un whitepaper","CEX vs DEX","Sécuriser ses crypto"],
-content:{title:"Les Fondamentaux Crypto",body:`
-<p>Avant d'investir le moindre euro, comprendre ce que vous achetez est non-négociable. La majorité des pertes en crypto viennent d'une chose simple : agir sans comprendre.</p>
-<div class="highlight-box">"Bitcoin n'est pas une action. C'est un protocole monétaire. Comprendre cette différence change tout à votre approche."</div>
-<h3>La blockchain en termes simples</h3>
-<p>Une blockchain est un registre partagé, immuable et décentralisé. Personne ne peut modifier les transactions passées. Personne ne contrôle le réseau. C'est cette propriété fondamentale qui donne de la valeur au Bitcoin — pas la spéculation.</p>
-<h3>Comparatif des principales cryptos</h3>
-<table class="data-table">
-<tr><th>Crypto</th><th>Création</th><th>Offre max</th><th>Usage principal</th><th>Risque</th></tr>
-<tr><td class="highlight">Bitcoin (BTC)</td><td>2009</td><td>21M</td><td>Réserve de valeur</td><td class="good">Faible</td></tr>
-<tr><td class="highlight">Ethereum (ETH)</td><td>2015</td><td>Illimitée</td><td>Smart contracts, DeFi</td><td class="neutral">Moyen</td></tr>
-<tr><td class="highlight">Solana (SOL)</td><td>2020</td><td>Illimitée</td><td>Transactions rapides</td><td class="bad">Élevé</td></tr>
-<tr><td class="highlight">Litecoin (LTC)</td><td>2011</td><td>84M</td><td>Paiements</td><td class="neutral">Moyen</td></tr>
-<tr><td class="highlight">Altcoins</td><td>Varies</td><td>Varies</td><td>Spéculatif</td><td class="bad">Très élevé</td></tr>
-</table>
-<h3>Pourquoi Bitcoin est différent des autres</h3>
-<div class="key-point">Offre limitée à 21 millions d'unités — déflationnaire par nature, comme l'or numérique</div>
-<div class="key-point">Aucune banque centrale ne peut en créer davantage — résistant à l'inflation</div>
-<div class="key-point">Réseau actif depuis 2009 sans interruption — le track record le plus solide du secteur</div>
-<div class="key-point">Adoption institutionnelle : BlackRock, Fidelity, MicroStrategy détiennent du BTC</div>
-<h4>Les halvings Bitcoin</h4>
-<p>Tous les 4 ans environ, la récompense des mineurs est divisée par 2. Historiquement, chaque halving a précédé un bull run majeur : 2012, 2016, 2020, 2024. Ce mécanisme réduit l'offre nouvelle tout en maintenant la demande.</p>
-<div class="highlight-box">"La règle d'or : n'investissez jamais ce que vous ne pouvez pas vous permettre de perdre totalement. Même Bitcoin peut chuter de 80%."</div>
-`,qcm:[
-{q:"Quelle est l'offre maximale de Bitcoin ?",opts:["100 millions","21 millions","Illimitée","42 millions"],correct:1,exp:"Bitcoin a une offre maximale de 21 millions d'unités, programmée dans son code source. C'est ce qui le rend déflationnaire."},
-{q:"Qu'est-ce qu'un halving Bitcoin ?",opts:["Une erreur dans le code","La division par 2 de la récompense des mineurs","La fusion de deux blockchains","Un bug de sécurité"],correct:1,exp:"Le halving divise par 2 la récompense accordée aux mineurs tous les ~4 ans, réduisant l'offre nouvelle de BTC."},
-{q:"Quelle crypto est principalement utilisée pour les smart contracts ?",opts:["Bitcoin","Litecoin","Ethereum","Dogecoin"],correct:2,exp:"Ethereum est la blockchain de référence pour les smart contracts et la DeFi, grâce à sa plateforme programmable."}
-]}},
-
-{icon:"📈",num:"02",title:"Trading & Analyse",desc:"Lire les marchés et gérer le risque comme un professionnel.",
-lessons:["Analyse technique : les bases","Support et résistance","RSI, MACD, Bollinger Bands","Les patterns chartistes","Gestion du risque 1-2%","DCA vs lump sum","Cycles de marché","Psychologie du trading","Order flow","Backtesting"],
-content:{title:"Trading & Analyse Technique",body:`
-<p>Le trading est avant tout une discipline de gestion du risque. Les meilleurs traders ne gagnent pas à chaque fois — ils perdent moins que les autres quand ils ont tort.</p>
-<div class="highlight-box">"Protéger son capital est la priorité absolue. Un trader qui perd 50% doit faire +100% pour revenir à zéro."</div>
-<h3>Les supports et résistances</h3>
-<p>Ce sont les niveaux où le prix a historiquement réagi. Plus un niveau est testé souvent, plus il est significatif. Un support cassé devient résistance — et inversement. C'est la base de l'analyse technique.</p>
-<h3>Les indicateurs essentiels</h3>
-<table class="data-table">
-<tr><th>Indicateur</th><th>Usage</th><th>Signal haussier</th><th>Signal baissier</th></tr>
-<tr><td class="highlight">RSI</td><td>Momentum</td><td class="good">RSI < 30 (survente)</td><td class="bad">RSI > 70 (surachat)</td></tr>
-<tr><td class="highlight">MACD</td><td>Tendance</td><td class="good">Croisement haussier</td><td class="bad">Croisement baissier</td></tr>
-<tr><td class="highlight">Bollinger</td><td>Volatilité</td><td class="good">Prix sous bande basse</td><td class="bad">Prix sur bande haute</td></tr>
-<tr><td class="highlight">Volume</td><td>Confirmation</td><td class="good">Hausse + volume fort</td><td class="bad">Hausse + volume faible</td></tr>
-</table>
-<h3>La règle fondamentale du risque</h3>
-<div class="key-point">Ne jamais risquer plus de 1-2% de son capital total sur une seule position</div>
-<div class="key-point">Toujours placer son stop-loss AVANT d'entrer en position — jamais après</div>
-<div class="key-point">Ratio risque/récompense minimum de 1:2 — viser 1:3 pour des trades de qualité</div>
-<div class="key-point">Tenir un journal de trading : analyser systématiquement ses erreurs</div>
-<h4>Exemple concret de gestion du risque</h4>
-<p>Capital : 10 000€ · Risque max par trade : 2% = 200€ · Si ton stop est à 5% sous l'entrée → tu peux entrer avec 4 000€ maximum (200 / 0.05 = 4000). Jamais plus.</p>
-<h3>Les cycles de marché crypto</h3>
-<table class="data-table">
-<tr><th>Phase</th><th>Caractéristiques</th><th>Stratégie</th></tr>
-<tr><td class="highlight">Accumulation</td><td>Prix bas, peu d'intérêt</td><td class="good">DCA agressif</td></tr>
-<tr><td class="highlight">Bull market</td><td>Hausse forte, euphorie</td><td class="neutral">Prendre des profits progressifs</td></tr>
-<tr><td class="highlight">Distribution</td><td>Volatilité, signaux mixtes</td><td class="neutral">Réduire l'exposition</td></tr>
-<tr><td class="highlight">Bear market</td><td>Baisse prolongée, panique</td><td class="bad">Cash ou stablecoins</td></tr>
-</table>
-`,qcm:[
-{q:"Quel est le ratio risque/récompense minimum recommandé ?",opts:["1:1","1:2","1:5","2:1"],correct:1,exp:"Un ratio 1:2 signifie que pour chaque euro risqué, on vise 2€ de gain. Cela permet d'être rentable même en ayant tort 40% du temps."},
-{q:"Que signifie un RSI de 25 ?",opts:["Surachat — vendre","Survente — opportunité d'achat potentielle","Tendance neutre","Signal de vente immédiate"],correct:1,exp:"Un RSI inférieur à 30 indique une survente. Ce n'est pas un signal d'achat automatique, mais une zone d'attention potentielle."},
-{q:"Quelle phase du cycle est idéale pour accumuler ?",opts:["Bull market","Distribution","Accumulation / Bear market","Toutes les phases"],correct:2,exp:"La phase d'accumulation et le bear market sont les meilleures périodes pour acheter, quand les prix sont bas et l'intérêt minimal."}
-]}},
-
-{icon:"💼",num:"03",title:"Investissement & Finance",desc:"Construire un portefeuille solide et comprendre la macro.",
-lessons:["Classes d'actifs","Portefeuille équilibré","L'inflation","ETF Bitcoin Spot","Staking et yield","Analyse fondamentale","Indicateurs macro","Rebalancing"],
-content:{title:"Investissement & Finance Personnelle",body:`
-<p>La richesse ne se construit pas sur des coups de chance isolés. Elle se construit sur des systèmes reproductibles, des allocations réfléchies et une discipline de fer sur le long terme.</p>
-<div class="highlight-box">"Diversifier ne signifie pas posséder 50 altcoins. Cela signifie répartir intelligemment entre des classes d'actifs réellement décorrélées."</div>
-<h3>Allocation suggérée par profil</h3>
-<table class="data-table">
-<tr><th>Profil</th><th>BTC</th><th>ETH/L2</th><th>Altcoins</th><th>Cash/Stables</th></tr>
-<tr><td class="highlight">Débutant</td><td class="good">70%</td><td>20%</td><td>0%</td><td>10%</td></tr>
-<tr><td class="highlight">Intermédiaire</td><td class="good">50%</td><td>25%</td><td>15%</td><td>10%</td></tr>
-<tr><td class="highlight">Avancé</td><td class="good">40%</td><td>25%</td><td>25%</td><td>10%</td></tr>
-<tr><td class="highlight">Spéculatif</td><td>30%</td><td>20%</td><td class="bad">40%</td><td>10%</td></tr>
-</table>
-<h3>Les indicateurs macro à surveiller</h3>
-<div class="key-point">DXY (Dollar Index) : quand le dollar monte, les actifs risqués baissent généralement</div>
-<div class="key-point">M2 Money Supply : l'expansion monétaire mondiale corrèle fortement avec le prix du BTC</div>
-<div class="key-point">Taux Fed : des taux bas = argent pas cher = appétit pour le risque élevé</div>
-<div class="key-point">Fear & Greed Index : extrême peur = opportunité, extrême cupidité = prudence</div>
-<h4>DCA vs Lump Sum — quand choisir ?</h4>
-<table class="data-table">
-<tr><th>Stratégie</th><th>Avantage</th><th>Inconvénient</th><th>Idéal pour</th></tr>
-<tr><td class="highlight">DCA mensuel</td><td class="good">Lisse le risque</td><td>Sous-performe en bull fort</td><td>Débutants, salariés</td></tr>
-<tr><td class="highlight">Lump Sum</td><td class="good">Maximise si timing bon</td><td class="bad">Risque de mauvais timing</td><td>Opportunistes confirmés</td></tr>
-<tr><td class="highlight">DCA + dips</td><td class="good">Meilleur des deux</td><td>Nécessite du cash disponible</td><td>Intermédiaires</td></tr>
-</table>
-`,qcm:[
-{q:"Quel indicateur suit la création monétaire mondiale ?",opts:["DXY","M2 Money Supply","RSI","Bollinger Bands"],correct:1,exp:"Le M2 Money Supply mesure la masse monétaire en circulation. Une expansion du M2 corrèle historiquement avec la hausse du Bitcoin."},
-{q:"Quelle allocation BTC est recommandée pour un débutant ?",opts:["10%","30%","70%","100%"],correct:2,exp:"Pour un débutant, 70% en BTC est recommandé car c'est l'actif crypto le moins risqué, avec le meilleur track record."},
-{q:"Que signifie un Fear & Greed Index à 5 ?",opts:["Marché en euphorie — vendre","Marché en peur extrême — opportunité potentielle","Signal neutre","Tendance haussière forte"],correct:1,exp:"Un score de 5/100 indique une peur extrême sur le marché. Historiquement, c'est souvent le moment où les opportunités d'achat sont les meilleures."}
-]}},
-
-{icon:"🏛️",num:"04",title:"Fiscalité & Légalité",desc:"Optimiser légalement et éviter les erreurs coûteuses.",
-lessons:["Taxation crypto en France","Flat tax 30%","Formulaire 2086","Cessions sous 305€","Holding et SCI","Régime BNC","Expatriation fiscale","Erreurs à éviter","Registre conforme","Waltio et Koinly"],
-content:{title:"Fiscalité Crypto — Optimiser Légalement",body:`
-<p>La fiscalité crypto est le sujet que tout le monde repousse jusqu'au dernier moment — et c'est une erreur coûteuse. Une mauvaise déclaration peut coûter des milliers d'euros. Une bonne optimisation peut en économiser autant.</p>
-<div class="highlight-box">"Optimiser fiscalement n'est pas frauder. C'est utiliser intelligemment les outils légaux mis à votre disposition."</div>
-<h3>Le régime fiscal français 2024</h3>
-<div class="key-point">Flat tax de 30% (12.8% IR + 17.2% prélèvements sociaux) sur les plus-values</div>
-<div class="key-point">Exonération totale si le total de vos cessions est inférieur à 305€ dans l'année</div>
-<div class="key-point">L'échange crypto-to-crypto N'EST PAS taxable — seulement la conversion en euros</div>
-<div class="key-point">Formulaire 2086 obligatoire + formulaire 3916-bis pour les comptes étrangers</div>
-<h3>Comparatif fiscal international</h3>
-<table class="data-table">
-<tr><th>Pays</th><th>Taux crypto</th><th>Conditions</th><th>Attractivité</th></tr>
-<tr><td class="highlight">France</td><td>30%</td><td>Standard</td><td class="neutral">Moyen</td></tr>
-<tr><td class="highlight">Portugal (NHR)</td><td class="good">0%</td><td>Résidence 183j/an</td><td class="good">Excellent</td></tr>
-<tr><td class="highlight">Dubaï (EAU)</td><td class="good">0%</td><td>Résidence + visa</td><td class="good">Excellent</td></tr>
-<tr><td class="highlight">Malte</td><td>0-35%</td><td>Selon structure</td><td class="neutral">Bon</td></tr>
-<tr><td class="highlight">Allemagne</td><td class="good">0% après 1 an</td><td>Détention > 12 mois</td><td class="good">Très bon</td></tr>
-<tr><td class="highlight">Suisse</td><td class="good">0%</td><td>Si trader non pro</td><td class="good">Excellent</td></tr>
-</table>
-<h4>Le formulaire 2086 expliqué</h4>
-<p>Ce formulaire calcule vos plus-values via le Prix Moyen Pondéré d'Acquisition (PMPA). Chaque cession en euros déclenche un calcul. <strong>Solution recommandée :</strong> Waltio ou Koinly génèrent automatiquement ce formulaire à partir de vos historiques d'exchange.</p>
-<h3>Erreurs fiscales les plus fréquentes</h3>
-<table class="data-table">
-<tr><th>Erreur</th><th>Conséquence</th><th>Solution</th></tr>
-<tr><td class="highlight">Ne pas déclarer</td><td class="bad">Redressement + pénalités 40%</td><td>Déclarer même les petites sommes</td></tr>
-<tr><td class="highlight">Oublier le 3916-bis</td><td class="bad">Amende 750€/compte</td><td>Déclarer tous les comptes étrangers</td></tr>
-<tr><td class="highlight">Confondre échange et vente</td><td class="bad">Sur-imposition</td><td>Seule la conversion en € est taxable</td></tr>
-<tr><td class="highlight">Pas de registre</td><td class="bad">Impossible de prouver les prix</td><td>Waltio/Koinly dès le premier achat</td></tr>
-</table>
-`,qcm:[
-{q:"Quel est le taux de la flat tax française sur les crypto ?",opts:["15%","20%","30%","45%"],correct:2,exp:"La flat tax (Prélèvement Forfaitaire Unique) est de 30% : 12.8% d'impôt sur le revenu + 17.2% de prélèvements sociaux."},
-{q:"Un échange BTC → ETH est-il taxable en France ?",opts:["Oui, à 30%","Non, seule la conversion en euros l'est","Oui, à 15%","Cela dépend du montant"],correct:1,exp:"En France, les échanges crypto-to-crypto ne sont pas taxables. Seule la conversion en monnaie fiat (euros) déclenche l'imposition."},
-{q:"Dans quel pays la détention crypto plus d'1 an est exonérée ?",opts:["France","Portugal","Allemagne","Espagne"],correct:2,exp:"En Allemagne, si vous détenez des cryptos plus de 12 mois, la plus-value est totalement exonérée d'impôt."}
-]}},
-
-{icon:"🧠",num:"05",title:"Psychologie & Mindset",desc:"Neutraliser les biais qui détruisent les investisseurs.",
-lessons:["FOMO et FUD","Biais de confirmation","Ne pas paniquer","Discipline vs émotion","La patience","Prendre ses profits","Syndrome de l'imposteur","Routine d'investisseur"],
-content:{title:"Psychologie de l'Investisseur",body:`
-<p>80% des traders perdants ont les mêmes connaissances techniques que les gagnants. La différence ? La gestion des émotions. Le marché est une machine à transférer l'argent des impatients vers les patients.</p>
-<div class="highlight-box">"Le marché ne vous doit rien. Il récompense la discipline, pas l'intelligence."</div>
-<h3>Les biais cognitifs les plus destructeurs</h3>
-<table class="data-table">
-<tr><th>Biais</th><th>Description</th><th>Impact</th><th>Antidote</th></tr>
-<tr><td class="highlight">FOMO</td><td>Peur de rater la hausse</td><td class="bad">Achète au plus haut</td><td>Plan d'achat prédéfini</td></tr>
-<tr><td class="highlight">Confirmation</td><td>Cherche ce qui confirme</td><td class="bad">Ignore les risques</td><td>Chercher l'opposé actif</td></tr>
-<tr><td class="highlight">Aversion perte</td><td>Hait perdre plus qu'aimer gagner</td><td class="bad">Hold trop longtemps</td><td>Stop-loss strict</td></tr>
-<tr><td class="highlight">Surconfiance</td><td>Surestimer ses capacités</td><td class="bad">Trop de risque</td><td>Journal de trading</td></tr>
-<tr><td class="highlight">Ancrage</td><td>Fixé sur un prix d'achat</td><td class="bad">Décisions irrationnelles</td><td>Évaluer le prix actuel</td></tr>
-</table>
-<h3>La pyramide de la discipline</h3>
-<div class="key-point">Niveau 1 — Règles écrites : définir AVANT d'investir les critères d'achat, de vente, de stop-loss</div>
-<div class="key-point">Niveau 2 — Journal : noter chaque trade, ses émotions, ses erreurs. Revoir mensuellement</div>
-<div class="key-point">Niveau 3 — Routine : vérifier les marchés à heures fixes, pas en continu</div>
-<div class="key-point">Niveau 4 — Détachement : traiter chaque trade comme une statistique, pas comme une identité</div>
-<div class="highlight-box">"La patience est l'arme secrète de l'investisseur. Ceux qui ont acheté BTC en 2017, gardé pendant le bear market de 2018-2020, et revendu en 2021 ont fait x10."</div>
-`,qcm:[
-{q:"Quel biais pousse à acheter au plus haut par peur de rater ?",opts:["Biais d'ancrage","FOMO","Aversion à la perte","Surconfiance"],correct:1,exp:"Le FOMO (Fear Of Missing Out) est la peur de rater une hausse. Il pousse à acheter impulsivement au plus haut, souvent juste avant une correction."},
-{q:"Quel est le meilleur antidote contre les décisions émotionnelles ?",opts:["Suivre les réseaux sociaux","Avoir des règles d'investissement écrites à l'avance","Trader plus souvent","Regarder les graphiques en continu"],correct:1,exp:"Écrire ses règles AVANT d'être en position est le meilleur moyen d'éviter les décisions émotionnelles. Quand l'émotion parle, on relit ses règles."},
-{q:"Qu'est-ce que le biais d'ancrage en trading ?",opts:["La tendance à trop trader","Se fixer sur un prix de référence passé pour prendre des décisions","La peur de perdre","L'euphorie du marché"],correct:1,exp:"Le biais d'ancrage consiste à rester fixé sur un prix d'achat ou un prix passé (ex: 'BTC était à 60k, je ne vends pas à 30k'). Il faut évaluer la situation actuelle, pas le passé."}
-]}},
-
-{icon:"🚀",num:"06",title:"Stratégies Avancées",desc:"On-chain, airdrops, DeFi et stratégies des baleines.",
-lessons:["Wallets baleines on-chain","Arbitrage","Liquidity providing","Options crypto","Airdrop farming","Glassnode et Nansen","Narratifs de marché","Revenu passif pérenne"],
-content:{title:"Stratégies Avancées",body:`
-<p>Une fois les bases maîtrisées, des opportunités invisibles aux débutants s'ouvrent. L'analyse on-chain, les airdrops, le yield farming — autant de leviers que les investisseurs aguerris exploitent quotidiennement.</p>
-<div class="highlight-box">"Les données blockchain sont publiques. Ceux qui savent les lire ont un avantage informationnel considérable sur les autres."</div>
-<h3>Les métriques on-chain essentielles</h3>
-<table class="data-table">
-<tr><th>Métrique</th><th>Source</th><th>Signal haussier</th><th>Signal baissier</th></tr>
-<tr><td class="highlight">SOPR</td><td>Glassnode</td><td class="good">> 1 (profits réalisés)</td><td class="bad">< 1 (pertes réalisées)</td></tr>
-<tr><td class="highlight">Exchange Flows</td><td>CryptoQuant</td><td class="good">Sorties nettes</td><td class="bad">Entrées nettes</td></tr>
-<tr><td class="highlight">NUPL</td><td>Glassnode</td><td class="good">Accumulation zone</td><td class="bad">Euphorie zone</td></tr>
-<tr><td class="highlight">Whale Activity</td><td>Nansen</td><td class="good">Accumulation baleines</td><td class="bad">Distribution baleines</td></tr>
-</table>
-<h3>Airdrop farming — stratégie complète</h3>
-<div class="key-point">Identifier les protocoles en early stage avec des investisseurs sérieux (a16z, Paradigm...)</div>
-<div class="key-point">Interagir régulièrement : swaps, bridges, dépôts de liquidité, gouvernance</div>
-<div class="key-point">Diversifier sur plusieurs wallets pour maximiser les allocations</div>
-<div class="key-point">Budget recommandé : 50-200€ en gas fees pour des retours potentiels de 1000€+</div>
-<h4>Exemples historiques d'airdrops</h4>
-<table class="data-table">
-<tr><th>Protocole</th><th>Date</th><th>Valeur moyenne</th><th>Critère</th></tr>
-<tr><td class="highlight">Uniswap (UNI)</td><td>2020</td><td class="good">~1 200$</td><td>Avoir utilisé le DEX</td></tr>
-<tr><td class="highlight">Arbitrum (ARB)</td><td>2023</td><td class="good">~2 000$</td><td>Transactions sur L2</td></tr>
-<tr><td class="highlight">dYdX</td><td>2021</td><td class="good">~3 000$</td><td>Volume de trading</td></tr>
-<tr><td class="highlight">Optimism (OP)</td><td>2022</td><td class="good">~1 500$</td><td>Utilisation du bridge</td></tr>
-</table>
-`,qcm:[
-{q:"Que signifie des 'sorties nettes des exchanges' ?",opts:["Les gens vendent massivement","Les gens retirent leurs BTC vers des wallets privés — signe haussier","Le marché est en panique","Les exchanges ferment"],correct:1,exp:"Quand les BTC sortent des exchanges vers des wallets privés, cela signifie que les investisseurs préfèrent garder (HODLer) plutôt que vendre. C'est généralement un signal haussier."},
-{q:"Quel est le coût typique pour farmer des airdrops ?",opts:["0€ — c'est totalement gratuit","50-200€ en gas fees","5 000€ minimum","1 000€ par protocole"],correct:1,exp:"Le farming d'airdrops nécessite généralement 50-200€ en frais de transaction (gas). Le ratio risque/récompense est excellent vu les retours historiques."},
-{q:"Quelle métrique mesure si les détenteurs vendent en profit ?",opts:["NUPL","Exchange Flows","SOPR","Fear & Greed"],correct:2,exp:"Le SOPR (Spent Output Profit Ratio) mesure si les coins dépensés l'ont été en profit (>1) ou en perte (<1). C'est un indicateur de sentiment des holders."}
-]}},
-];
-
-// ── GLOBAL STATE ───────────────────────────────────────────────
-let completedLessons=new Set();
-let quizScores={};
-const totalLessons=MODULES.reduce((a,m)=>a+m.lessons.length,0);
-let currentLesson=null;
-let currentModuleIdx=null;
-
-function loadProgress(){
-  try{completedLessons=new Set(JSON.parse(sessionStorage.getItem('cna_progress')||'[]'));}catch(e){}
-  try{quizScores=JSON.parse(sessionStorage.getItem('cna_scores')||'{}');}catch(e){}
-}
-function saveProgress(){
-  sessionStorage.setItem('cna_progress',JSON.stringify([...completedLessons]));
-  sessionStorage.setItem('cna_scores',JSON.stringify(quizScores));
-  updateProgress();
-  updateGlobalScore();
-}
-
-function updateProgress(){
-  const pct=Math.round((completedLessons.size/totalLessons)*100);
-  document.getElementById('progressFill').style.width=pct+'%';
-  document.getElementById('progressText').textContent=completedLessons.size+' / '+totalLessons+' leçons';
-  document.querySelectorAll('.lesson-row').forEach(r=>{
-    r.classList.toggle('done',completedLessons.has(r.dataset.key));
-    r.querySelector('.lesson-check').textContent=completedLessons.has(r.dataset.key)?'✓':'';
-  });
-}
-
-function updateGlobalScore(){
-  const scores=Object.values(quizScores);
-  if(scores.length===0)return;
-  const avg=Math.round(scores.reduce((a,b)=>a+b,0)/scores.length);
-  const badge=document.getElementById('globalScore');
-  const val=document.getElementById('globalScoreVal');
-  if(badge&&val){badge.style.display='inline-flex';val.textContent=avg;}
-}
-
-// ── NAVIGATION ─────────────────────────────────────────────────
-function showLanding(){document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));document.getElementById('landingScreen').classList.add('active');window.scrollTo(0,0);}
-function showLogin(){document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));document.getElementById('loginScreen').classList.add('active');window.scrollTo(0,0);}
-function showFormation(email){
-  document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
-  document.getElementById('formationScreen').classList.add('active');
-  document.getElementById('navEmail').textContent=email;
+// ── NAVIGATION ──────────────────────────────────────────────────
+function showScreen(id){
+  document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
   window.scrollTo(0,0);
+}
+function showLanding(){ showScreen('landingScreen'); }
+function showLogin(){ showScreen('loginScreen'); }
+function showFormation(email){
+  showScreen('formationScreen');
+  document.getElementById('navEmail').textContent = email;
   loadProgress();
   renderPreview();
   renderModules();
   updateProgress();
   updateGlobalScore();
 }
-function doLogout(){sessionStorage.removeItem('cna_token');sessionStorage.removeItem('cna_email');document.getElementById('contentPanel').classList.remove('visible');showLanding();}
 
-// ── AUTH ───────────────────────────────────────────────────────
+// ── AUTH ────────────────────────────────────────────────────────
 async function doLogin(){
-  const email=document.getElementById('emailInput').value.trim();
-  const password=document.getElementById('passwordInput').value;
-  const btn=document.getElementById('loginBtn');
-  const err=document.getElementById('errorMsg');
-  if(!email||!password){showErr('Remplis tous les champs.');return;}
-  btn.disabled=true;btn.textContent='Connexion...';err.classList.remove('visible');
-  try{
-    const res=await fetch('https://login-formation.thomas86renault.workers.dev',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({email,password})});
-    const data=await res.json();
-    if(!res.ok){showErr(data.error||'Erreur de connexion');return;}
-    sessionStorage.setItem('cna_token',data.token);
-    sessionStorage.setItem('cna_email',data.email);
-    showFormation(data.email);
-}catch(e){
-    showErr('Serveur indisponible. Réessaie dans quelques instants.');
-  }finally{btn.disabled=false;btn.textContent='Accéder à la formation';}
-}
-function showErr(msg){const el=document.getElementById('errorMsg');el.textContent=msg;el.classList.add('visible');}
+  const email    = document.getElementById('emailInput').value.trim();
+  const password = document.getElementById('passwordInput').value;
+  const btn      = document.getElementById('loginBtn');
+  const errEl    = document.getElementById('errorMsg');
 
-// ── RENDER PREVIEW ─────────────────────────────────────────────
+  if(!email || !password){ showErr('Remplis tous les champs.'); return; }
+
+  btn.disabled = true;
+  btn.textContent = 'Connexion...';
+  errEl.classList.remove('visible');
+
+  try {
+    const res  = await fetch(LOGIN_URL, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ email, password })
+    });
+    const data = await res.json();
+
+    if(!res.ok){
+      showErr(data.error || 'Identifiants incorrects');
+      return;
+    }
+
+    sessionStorage.setItem('cna_token', data.token);
+    sessionStorage.setItem('cna_email', data.email);
+    showFormation(data.email);
+
+  } catch(e) {
+    showErr('Serveur indisponible. Réessaie dans quelques instants.');
+  } finally {
+    btn.disabled = false;
+    btn.textContent = 'Accéder à la formation';
+  }
+}
+
+function showErr(msg){
+  const el = document.getElementById('errorMsg');
+  el.textContent = msg;
+  el.classList.add('visible');
+}
+
+function doLogout(){
+  sessionStorage.removeItem('cna_token');
+  sessionStorage.removeItem('cna_email');
+  document.getElementById('contentPanel').classList.remove('visible');
+  showLanding();
+}
+
+// ── PROGRESS ────────────────────────────────────────────────────
+let completedLessons = new Set();
+let quizScores = {};
+const MODULES_DATA = [
+  {icon:"₿",num:"01",title:"Fondamentaux Crypto",desc:"Blockchain, Bitcoin, Ethereum, DeFi — les bases indispensables.",lessons:["Qu'est-ce que la blockchain vraiment","Bitcoin : réserve de valeur ou monnaie ?","Ethereum et les smart contracts","DeFi : la finance sans banque","NFT et Web3 : réalité ou spéculation ?","Lire un whitepaper","CEX vs DEX","Sécuriser ses crypto"],content:{title:"Les Fondamentaux Crypto",body:`<p>Avant d'investir le moindre euro, comprendre ce que vous achetez est non-négociable.</p><div class="highlight-box">"Bitcoin n'est pas une action. C'est un protocole monétaire."</div><h3>Comparatif des principales cryptos</h3><table class="data-table"><tr><th>Crypto</th><th>Offre max</th><th>Usage</th><th>Risque</th></tr><tr><td class="highlight">Bitcoin (BTC)</td><td>21M</td><td>Réserve de valeur</td><td class="good">Faible</td></tr><tr><td class="highlight">Ethereum (ETH)</td><td>Illimitée</td><td>Smart contracts</td><td class="neutral">Moyen</td></tr><tr><td class="highlight">Solana (SOL)</td><td>Illimitée</td><td>Transactions rapides</td><td class="bad">Élevé</td></tr></table><div class="key-point">Offre limitée à 21 millions d'unités — déflationnaire par nature</div><div class="key-point">Aucune banque centrale ne peut en créer davantage</div><div class="key-point">Réseau actif depuis 2009 sans interruption</div><div class="highlight-box">"La règle d'or : n'investissez jamais ce que vous ne pouvez pas vous permettre de perdre totalement."</div>`,qcm:[{q:"Quelle est l'offre maximale de Bitcoin ?",opts:["100 millions","21 millions","Illimitée","42 millions"],correct:1,exp:"Bitcoin a une offre maximale de 21 millions d'unités programmée dans son code source."},{q:"Qu'est-ce qu'un halving Bitcoin ?",opts:["Une erreur dans le code","La division par 2 de la récompense des mineurs","La fusion de deux blockchains","Un bug de sécurité"],correct:1,exp:"Le halving divise par 2 la récompense des mineurs tous les ~4 ans."},{q:"Quelle crypto est utilisée pour les smart contracts ?",opts:["Bitcoin","Litecoin","Ethereum","Dogecoin"],correct:2,exp:"Ethereum est la blockchain de référence pour les smart contracts et la DeFi."}]}},
+  {icon:"📈",num:"02",title:"Trading & Analyse",desc:"Lire les marchés et gérer le risque comme un professionnel.",lessons:["Analyse technique : les bases","Support et résistance","RSI, MACD, Bollinger Bands","Les patterns chartistes","Gestion du risque 1-2%","DCA vs lump sum","Cycles de marché","Psychologie du trading","Order flow","Backtesting"],content:{title:"Trading & Analyse Technique",body:`<p>Le trading est avant tout une discipline de gestion du risque.</p><div class="highlight-box">"Protéger son capital est la priorité absolue."</div><h3>Les indicateurs essentiels</h3><table class="data-table"><tr><th>Indicateur</th><th>Signal haussier</th><th>Signal baissier</th></tr><tr><td class="highlight">RSI</td><td class="good">RSI &lt; 30</td><td class="bad">RSI &gt; 70</td></tr><tr><td class="highlight">MACD</td><td class="good">Croisement haussier</td><td class="bad">Croisement baissier</td></tr><tr><td class="highlight">Volume</td><td class="good">Hausse + volume fort</td><td class="bad">Hausse + volume faible</td></tr></table><div class="key-point">Ne jamais risquer plus de 1-2% de son capital sur une seule position</div><div class="key-point">Toujours placer son stop-loss AVANT d'entrer en position</div><div class="key-point">Ratio risque/récompense minimum de 1:2</div>`,qcm:[{q:"Quel est le ratio risque/récompense minimum recommandé ?",opts:["1:1","1:2","1:5","2:1"],correct:1,exp:"Un ratio 1:2 permet d'être rentable même en ayant tort 40% du temps."},{q:"Que signifie un RSI de 25 ?",opts:["Surachat — vendre","Survente — opportunité potentielle","Tendance neutre","Signal de vente"],correct:1,exp:"Un RSI inférieur à 30 indique une survente."},{q:"Quelle phase du cycle est idéale pour accumuler ?",opts:["Bull market","Distribution","Accumulation / Bear market","Toutes les phases"],correct:2,exp:"La phase d'accumulation et le bear market sont les meilleures périodes pour acheter."}]}},
+  {icon:"💼",num:"03",title:"Investissement & Finance",desc:"Construire un portefeuille solide et comprendre la macro.",lessons:["Classes d'actifs","Portefeuille équilibré","L'inflation","ETF Bitcoin Spot","Staking et yield","Analyse fondamentale","Indicateurs macro","Rebalancing"],content:{title:"Investissement & Finance Personnelle",body:`<p>La richesse se construit sur des systèmes reproductibles et des allocations réfléchies.</p><div class="highlight-box">"Diversifier ne signifie pas posséder 50 altcoins."</div><h3>Allocation suggérée par profil</h3><table class="data-table"><tr><th>Profil</th><th>BTC</th><th>ETH/L2</th><th>Altcoins</th><th>Cash</th></tr><tr><td class="highlight">Débutant</td><td class="good">70%</td><td>20%</td><td>0%</td><td>10%</td></tr><tr><td class="highlight">Intermédiaire</td><td class="good">50%</td><td>25%</td><td>15%</td><td>10%</td></tr><tr><td class="highlight">Avancé</td><td class="good">40%</td><td>25%</td><td>25%</td><td>10%</td></tr></table><div class="key-point">DXY en hausse = actifs risqués en baisse généralement</div><div class="key-point">Fear & Greed Index bas = opportunité d'achat potentielle</div>`,qcm:[{q:"Quel indicateur suit la création monétaire mondiale ?",opts:["DXY","M2 Money Supply","RSI","Bollinger Bands"],correct:1,exp:"Le M2 Money Supply corrèle historiquement avec la hausse du Bitcoin."},{q:"Quelle allocation BTC pour un débutant ?",opts:["10%","30%","70%","100%"],correct:2,exp:"70% en BTC est recommandé pour un débutant — c'est l'actif crypto le moins risqué."},{q:"Fear & Greed Index à 5 signifie ?",opts:["Euphorie — vendre","Peur extrême — opportunité potentielle","Signal neutre","Tendance haussière"],correct:1,exp:"Un score de 5/100 indique une peur extrême — souvent un bon moment pour acheter."}]}},
+  {icon:"🏛️",num:"04",title:"Fiscalité & Légalité",desc:"Optimiser légalement et éviter les erreurs coûteuses.",lessons:["Taxation crypto en France","Flat tax 30%","Formulaire 2086","Cessions sous 305€","Holding et SCI","Régime BNC","Expatriation fiscale","Erreurs à éviter","Registre conforme","Waltio et Koinly"],content:{title:"Fiscalité Crypto — Optimiser Légalement",body:`<p>Une mauvaise déclaration peut coûter des milliers d'euros.</p><div class="highlight-box">"Optimiser fiscalement n'est pas frauder."</div><h3>Comparatif fiscal international</h3><table class="data-table"><tr><th>Pays</th><th>Taux crypto</th><th>Attractivité</th></tr><tr><td class="highlight">France</td><td>30%</td><td class="neutral">Moyen</td></tr><tr><td class="highlight">Portugal (NHR)</td><td class="good">0%</td><td class="good">Excellent</td></tr><tr><td class="highlight">Dubaï</td><td class="good">0%</td><td class="good">Excellent</td></tr><tr><td class="highlight">Allemagne</td><td class="good">0% après 1 an</td><td class="good">Très bon</td></tr><tr><td class="highlight">Suisse</td><td class="good">0%</td><td class="good">Excellent</td></tr></table><div class="key-point">Flat tax 30% = 12.8% IR + 17.2% prélèvements sociaux</div><div class="key-point">Échange crypto-to-crypto NON taxable</div><div class="key-point">Formulaire 2086 + 3916-bis obligatoires</div>`,qcm:[{q:"Taux de la flat tax française sur les crypto ?",opts:["15%","20%","30%","45%"],correct:2,exp:"La flat tax est de 30% : 12.8% IR + 17.2% prélèvements sociaux."},{q:"Un échange BTC → ETH est-il taxable en France ?",opts:["Oui à 30%","Non, seule la conversion en euros l'est","Oui à 15%","Dépend du montant"],correct:1,exp:"En France, les échanges crypto-to-crypto ne sont pas taxables."},{q:"Dans quel pays la détention >1 an est exonérée ?",opts:["France","Portugal","Allemagne","Espagne"],correct:2,exp:"En Allemagne, détenir des cryptos plus de 12 mois = exonération totale."}]}},
+  {icon:"🧠",num:"05",title:"Psychologie & Mindset",desc:"Neutraliser les biais qui détruisent les investisseurs.",lessons:["FOMO et FUD","Biais de confirmation","Ne pas paniquer","Discipline vs émotion","La patience","Prendre ses profits","Syndrome de l'imposteur","Routine d'investisseur"],content:{title:"Psychologie de l'Investisseur",body:`<p>80% des traders perdants ont les mêmes connaissances que les gagnants. La différence : la gestion des émotions.</p><div class="highlight-box">"Le marché récompense la discipline, pas l'intelligence."</div><h3>Les biais cognitifs destructeurs</h3><table class="data-table"><tr><th>Biais</th><th>Impact</th><th>Antidote</th></tr><tr><td class="highlight">FOMO</td><td class="bad">Achète au plus haut</td><td>Plan prédéfini</td></tr><tr><td class="highlight">Confirmation</td><td class="bad">Ignore les risques</td><td>Chercher l'opposé</td></tr><tr><td class="highlight">Aversion perte</td><td class="bad">Hold trop longtemps</td><td>Stop-loss strict</td></tr><tr><td class="highlight">Surconfiance</td><td class="bad">Trop de risque</td><td>Journal de trading</td></tr></table><div class="key-point">Écrire ses règles AVANT d'être en position</div><div class="key-point">Tenir un journal de trading et analyser ses erreurs</div>`,qcm:[{q:"Quel biais pousse à acheter au plus haut ?",opts:["Biais d'ancrage","FOMO","Aversion à la perte","Surconfiance"],correct:1,exp:"Le FOMO pousse à acheter impulsivement au plus haut par peur de rater."},{q:"Meilleur antidote contre les décisions émotionnelles ?",opts:["Suivre les réseaux","Règles d'investissement écrites à l'avance","Trader plus souvent","Regarder les graphiques en continu"],correct:1,exp:"Écrire ses règles AVANT d'être en position évite les décisions émotionnelles."},{q:"Qu'est-ce que le biais d'ancrage ?",opts:["Trop trader","Se fixer sur un prix de référence passé","La peur de perdre","L'euphorie"],correct:1,exp:"L'ancrage consiste à rester fixé sur un prix passé au lieu d'évaluer la situation actuelle."}]}},
+  {icon:"🚀",num:"06",title:"Stratégies Avancées",desc:"On-chain, airdrops, DeFi et stratégies des baleines.",lessons:["Wallets baleines on-chain","Arbitrage","Liquidity providing","Options crypto","Airdrop farming","Glassnode et Nansen","Narratifs de marché","Revenu passif pérenne"],content:{title:"Stratégies Avancées",body:`<p>Des opportunités invisibles aux débutants s'ouvrent une fois les bases maîtrisées.</p><div class="highlight-box">"Les données blockchain sont publiques. Ceux qui savent les lire ont un avantage."</div><h3>Métriques on-chain essentielles</h3><table class="data-table"><tr><th>Métrique</th><th>Signal haussier</th><th>Signal baissier</th></tr><tr><td class="highlight">SOPR</td><td class="good">&gt; 1</td><td class="bad">&lt; 1</td></tr><tr><td class="highlight">Exchange Flows</td><td class="good">Sorties nettes</td><td class="bad">Entrées nettes</td></tr><tr><td class="highlight">Whale Activity</td><td class="good">Accumulation</td><td class="bad">Distribution</td></tr></table><h3>Airdrops historiques</h3><table class="data-table"><tr><th>Protocole</th><th>Valeur moyenne</th></tr><tr><td class="highlight">Uniswap (UNI)</td><td class="good">~1 200$</td></tr><tr><td class="highlight">Arbitrum (ARB)</td><td class="good">~2 000$</td></tr><tr><td class="highlight">Optimism (OP)</td><td class="good">~1 500$</td></tr></table>`,qcm:[{q:"Que signifient des sorties nettes des exchanges ?",opts:["Vente massive","Les gens retirent leurs BTC — signe haussier","Marché en panique","Les exchanges ferment"],correct:1,exp:"Les sorties d'exchanges vers des wallets privés = hodl = signal haussier."},{q:"Coût typique pour farmer des airdrops ?",opts:["0€","50-200€ en gas fees","5 000€ minimum","1 000€ par protocole"],correct:1,exp:"50-200€ en gas fees pour des retours potentiels de 1000€+."},{q:"Quelle métrique mesure si les détenteurs vendent en profit ?",opts:["NUPL","Exchange Flows","SOPR","Fear & Greed"],correct:2,exp:"Le SOPR mesure si les coins dépensés l'ont été en profit (>1) ou en perte (<1)."}]}}
+];
+
+const totalLessons = MODULES_DATA.reduce((a,m)=>a+m.lessons.length,0);
+let currentLesson = null;
+const userAnswers = {};
+
+function loadProgress(){
+  try{ completedLessons=new Set(JSON.parse(sessionStorage.getItem('cna_p')||'[]')); }catch(e){}
+  try{ quizScores=JSON.parse(sessionStorage.getItem('cna_s')||'{}'); }catch(e){}
+}
+function saveProgress(){
+  sessionStorage.setItem('cna_p',JSON.stringify([...completedLessons]));
+  sessionStorage.setItem('cna_s',JSON.stringify(quizScores));
+  updateProgress();
+  updateGlobalScore();
+}
+function updateProgress(){
+  const pct=Math.round((completedLessons.size/totalLessons)*100);
+  document.getElementById('progressFill').style.width=pct+'%';
+  document.getElementById('progressText').textContent=completedLessons.size+' / '+totalLessons+' leçons';
+  document.querySelectorAll('.lesson-row').forEach(r=>{
+    const done=completedLessons.has(r.dataset.key);
+    r.classList.toggle('done',done);
+    r.querySelector('.lesson-check').textContent=done?'✓':'';
+  });
+}
+function updateGlobalScore(){
+  const scores=Object.values(quizScores);
+  if(!scores.length)return;
+  const avg=Math.round(scores.reduce((a,b)=>a+b,0)/scores.length);
+  const badge=document.getElementById('globalScore');
+  const val=document.getElementById('globalScoreVal');
+  if(badge&&val){ badge.style.display='inline-flex'; val.textContent=avg; }
+}
+
 function renderPreview(){
   const grid=document.getElementById('previewGrid');
   if(!grid||grid.children.length>0)return;
-  MODULES.forEach(m=>{
+  MODULES_DATA.forEach(m=>{
     const card=document.createElement('div');
     card.className='preview-card';
     card.innerHTML=`<span class="preview-icon">${m.icon}</span><p class="preview-num">Module ${m.num}</p><h3 class="preview-title">${m.title}</h3><p class="preview-desc">${m.desc}</p>`;
@@ -600,20 +442,19 @@ function renderPreview(){
   });
 }
 
-// ── RENDER MODULES ─────────────────────────────────────────────
 function renderModules(){
   const grid=document.getElementById('modulesGrid');
   grid.innerHTML='';
-  MODULES.forEach((m,mi)=>{
+  MODULES_DATA.forEach((m,mi)=>{
+    const score=quizScores[mi]!==undefined?` · Quiz: ${quizScores[mi]}%`:'';
     const card=document.createElement('div');
     card.className='mod-card';
-    const score=quizScores[mi]!==undefined?` · Quiz: ${quizScores[mi]}%`:'';
     card.innerHTML=`
       <div class="mod-header"><span class="mod-icon">${m.icon}</span><span class="mod-badge">${m.lessons.length} leçons${score}</span></div>
       <p class="mod-num">Module ${m.num}</p>
       <h3 class="mod-title">${m.title}</h3>
       <p class="mod-desc">${m.desc}</p>
-      <div class="lessons-list">${m.lessons.map((l,li)=>{const k=`${mi}-${li}`;return`<div class="lesson-row" data-key="${k}" onclick="openLesson(${mi},${li},event)"><div class="lesson-check">${completedLessons.has(k)?'✓':''}</div><span class="lesson-name">${l}</span></div>`}).join('')}</div>
+      <div class="lessons-list">${m.lessons.map((l,li)=>{const k=`${mi}-${li}`;return`<div class="lesson-row" data-key="${k}" onclick="openLesson(${mi},${li},event)"><div class="lesson-check">${completedLessons.has(k)?'✓':''}</div><span class="lesson-name">${l}</span></div>`;}).join('')}</div>
       <div class="expand-btn"><div class="expand-icon">+</div><span>Programme</span></div>`;
     card.addEventListener('click',e=>{
       if(e.target.closest('.lesson-row'))return;
@@ -626,75 +467,51 @@ function renderModules(){
   updateProgress();
 }
 
-// ── OPEN LESSON ────────────────────────────────────────────────
 function openLesson(mi,li,e){
   if(e)e.stopPropagation();
-  const m=MODULES[mi];
+  const m=MODULES_DATA[mi];
   currentLesson=`${mi}-${li}`;
-  currentModuleIdx=mi;
   document.getElementById('contentBreadcrumb').textContent=`Module ${m.num} · ${m.lessons[li]}`;
   document.getElementById('contentTitle').textContent=m.lessons[li];
-
-  // Contenu principal + QCM
-  const qcmHtml=buildQCM(mi);
-  document.getElementById('contentBody').innerHTML=m.content.body+qcmHtml;
-
+  document.getElementById('contentBody').innerHTML=m.content.body+buildQCM(mi);
   const done=completedLessons.has(currentLesson);
   const btn=document.getElementById('markDoneBtn');
   btn.textContent=done?'✓ Leçon terminée':'✓ Marquer comme terminé';
   btn.style.opacity=done?'0.5':'1';
-
   const panel=document.getElementById('contentPanel');
   panel.classList.add('visible');
   setTimeout(()=>panel.scrollIntoView({behavior:'smooth',block:'start'}),100);
 }
 
-// ── BUILD QCM ──────────────────────────────────────────────────
 function buildQCM(mi){
-  const m=MODULES[mi];
-  const score=quizScores[mi];
-  const scoreHtml=score!==undefined?`<div style="text-align:center;margin-bottom:24px;"><div style="font-size:9px;letter-spacing:2px;color:var(--gold);text-transform:uppercase;">Votre score précédent</div><div style="font-family:'Cormorant Garamond',serif;font-size:36px;color:var(--gold);">${score}%</div></div>`:'';
-
-  const questionsHtml=m.content.qcm.map((q,qi)=>`
-    <div class="question-block" id="q-${mi}-${qi}">
-      <p class="question-num">Question ${qi+1} / ${m.content.qcm.length}</p>
-      <p class="question-text">${q.q}</p>
-      <div class="options">
-        ${q.opts.map((opt,oi)=>`
+  const m=MODULES_DATA[mi];
+  const prevScore=quizScores[mi]!==undefined?`<div style="text-align:center;margin-bottom:24px"><div style="font-size:9px;letter-spacing:2px;color:var(--gold);text-transform:uppercase">Score précédent</div><div style="font-family:'Cormorant Garamond',serif;font-size:36px;color:var(--gold)">${quizScores[mi]}%</div></div>`:'';
+  return `<div class="qcm-section" id="qcm-${mi}">
+    <h2 class="qcm-title">Quiz du module</h2>
+    <p class="qcm-subtitle">${m.content.qcm.length} questions · Testez vos connaissances</p>
+    ${prevScore}
+    ${m.content.qcm.map((q,qi)=>`
+      <div class="question-block" id="q-${mi}-${qi}">
+        <p class="question-num">Question ${qi+1} / ${m.content.qcm.length}</p>
+        <p class="question-text">${q.q}</p>
+        <div class="options">${q.opts.map((opt,oi)=>`
           <div class="option" id="opt-${mi}-${qi}-${oi}" onclick="selectOption(${mi},${qi},${oi})">
-            <div class="option-letter">${String.fromCharCode(65+oi)}</div>
-            <span>${opt}</span>
-          </div>
-        `).join('')}
-      </div>
-      <div class="explanation" id="exp-${mi}-${qi}">${q.exp}</div>
+            <div class="option-letter">${String.fromCharCode(65+oi)}</div><span>${opt}</span>
+          </div>`).join('')}</div>
+        <div class="explanation" id="exp-${mi}-${qi}">${q.exp}</div>
+      </div>`).join('')}
+    <div style="text-align:center"><button class="submit-qcm" onclick="submitQCM(${mi})">Valider mes réponses</button></div>
+    <div class="score-final" id="score-final-${mi}">
+      <div class="score-label">Votre score</div>
+      <div class="score-number" id="score-num-${mi}">0%</div>
+      <div class="score-message" id="score-msg-${mi}"></div>
+      <button class="retry-btn" onclick="retryQCM(${mi})">Recommencer</button>
     </div>
-  `).join('');
-
-  return `
-    <div class="qcm-section" id="qcm-${mi}">
-      <h2 class="qcm-title">Quiz du module</h2>
-      <p class="qcm-subtitle">${m.content.qcm.length} questions · Testez vos connaissances</p>
-      ${scoreHtml}
-      ${questionsHtml}
-      <div style="text-align:center;">
-        <button class="submit-qcm" onclick="submitQCM(${mi})">Valider mes réponses</button>
-      </div>
-      <div class="score-final" id="score-final-${mi}">
-        <div class="score-label">Votre score</div>
-        <div class="score-number" id="score-num-${mi}">0%</div>
-        <div class="score-message" id="score-msg-${mi}"></div>
-        <button class="retry-btn" onclick="retryQCM(${mi})">Recommencer le quiz</button>
-      </div>
-    </div>`;
+  </div>`;
 }
 
-// ── QCM LOGIC ──────────────────────────────────────────────────
-const userAnswers={};
-
 function selectOption(mi,qi,oi){
-  // Désélectionne les autres options
-  MODULES[mi].content.qcm[qi].opts.forEach((_,i)=>{
+  MODULES_DATA[mi].content.qcm[qi].opts.forEach((_,i)=>{
     document.getElementById(`opt-${mi}-${qi}-${i}`)?.classList.remove('selected');
   });
   document.getElementById(`opt-${mi}-${qi}-${oi}`)?.classList.add('selected');
@@ -703,78 +520,64 @@ function selectOption(mi,qi,oi){
 }
 
 function submitQCM(mi){
-  const m=MODULES[mi];
+  const m=MODULES_DATA[mi];
   const answers=userAnswers[mi]||{};
   let correct=0;
-
   m.content.qcm.forEach((q,qi)=>{
-    const selected=answers[qi];
-    if(selected===undefined){
-      // Pas de réponse sélectionnée
-      return;
-    }
-    // Affiche correct/wrong
+    const sel=answers[qi];
+    if(sel===undefined)return;
     m.content.qcm[qi].opts.forEach((_,oi)=>{
       const el=document.getElementById(`opt-${mi}-${qi}-${oi}`);
       if(!el)return;
       el.style.pointerEvents='none';
       if(oi===q.correct)el.classList.add('correct');
-      else if(oi===selected&&selected!==q.correct)el.classList.add('wrong');
+      else if(oi===sel&&sel!==q.correct)el.classList.add('wrong');
     });
-    // Affiche explication
-    const exp=document.getElementById(`exp-${mi}-${qi}`);
-    if(exp)exp.classList.add('visible');
-    if(selected===q.correct)correct++;
+    document.getElementById(`exp-${mi}-${qi}`)?.classList.add('visible');
+    if(sel===q.correct)correct++;
   });
-
   const score=Math.round((correct/m.content.qcm.length)*100);
   quizScores[mi]=score;
   saveProgress();
   renderModules();
-
-  // Affiche score final
-  const finalDiv=document.getElementById(`score-final-${mi}`);
   const numEl=document.getElementById(`score-num-${mi}`);
   const msgEl=document.getElementById(`score-msg-${mi}`);
-
+  const finalDiv=document.getElementById(`score-final-${mi}`);
   if(numEl)numEl.textContent=score+'%';
-  if(msgEl){
-    if(score===100)msgEl.textContent='Parfait ! Vous maîtrisez ce module.';
-    else if(score>=66)msgEl.textContent='Très bien ! Quelques points à revoir.';
-    else if(score>=33)msgEl.textContent='Bien. Relisez le cours et réessayez.';
-    else msgEl.textContent='Relisez le cours attentivement avant de retenter.';
-  }
+  if(msgEl)msgEl.textContent=score===100?'Parfait !':score>=66?'Très bien !':score>=33?'Bien. Relisez le cours.':'Relisez le cours attentivement.';
   if(finalDiv)finalDiv.classList.add('visible');
 }
 
 function retryQCM(mi){
-  if(userAnswers[mi])delete userAnswers[mi];
-  // Réinitialise les options
-  MODULES[mi].content.qcm.forEach((q,qi)=>{
+  delete userAnswers[mi];
+  MODULES_DATA[mi].content.qcm.forEach((q,qi)=>{
     q.opts.forEach((_,oi)=>{
       const el=document.getElementById(`opt-${mi}-${qi}-${oi}`);
       if(el){el.classList.remove('correct','wrong','selected');el.style.pointerEvents='';}
     });
-    const exp=document.getElementById(`exp-${mi}-${qi}`);
-    if(exp)exp.classList.remove('visible');
+    document.getElementById(`exp-${mi}-${qi}`)?.classList.remove('visible');
   });
-  const finalDiv=document.getElementById(`score-final-${mi}`);
-  if(finalDiv)finalDiv.classList.remove('visible');
+  document.getElementById(`score-final-${mi}`)?.classList.remove('visible');
 }
 
-// ── MARK DONE ──────────────────────────────────────────────────
 document.getElementById('markDoneBtn').addEventListener('click',()=>{
   if(!currentLesson)return;
-  if(completedLessons.has(currentLesson)){completedLessons.delete(currentLesson);document.getElementById('markDoneBtn').textContent='✓ Marquer comme terminé';document.getElementById('markDoneBtn').style.opacity='1';}
-  else{completedLessons.add(currentLesson);document.getElementById('markDoneBtn').textContent='✓ Leçon terminée';document.getElementById('markDoneBtn').style.opacity='0.5';}
+  if(completedLessons.has(currentLesson)){
+    completedLessons.delete(currentLesson);
+    document.getElementById('markDoneBtn').textContent='✓ Marquer comme terminé';
+    document.getElementById('markDoneBtn').style.opacity='1';
+  } else {
+    completedLessons.add(currentLesson);
+    document.getElementById('markDoneBtn').textContent='✓ Leçon terminée';
+    document.getElementById('markDoneBtn').style.opacity='0.5';
+  }
   saveProgress();
 });
 
-// ── INIT ───────────────────────────────────────────────────────
-window.addEventListener('DOMContentLoaded',()=>{
+// ── INIT ────────────────────────────────────────────────────────
+window.addEventListener('DOMContentLoaded', () => {
   renderPreview();
   showLanding();
-  if(window.location.hash==='#login')showLogin();
 });
 </script>
 </body>
